@@ -5,3 +5,5 @@ This is where you will see the work for my startup project and my early coding p
 My name is Cameron Woffinden. I'm a student at BYU from Holly Springs, NC.
 
 My name is Cameron Woffinden. I served my mission in Pocatello, Idaho.
+
+Through this first assignment I've learned the basics of GitHub, commits, pushing and pulling, and merging commits in both VS Code and GitHub.
