@@ -1,2 +1,3 @@
 # startup
 This is my startup repository. 
+This is where you will see the work for my startup project and my early coding projects.
