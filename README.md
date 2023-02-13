@@ -16,3 +16,10 @@ Here's the idea: an app that lets users create music by letting them experiment 
 
 Simon-html notes:
 One thing I learned through this experience was how specific you need to be with html. If you want a new line, row, element, etc., it will not give you one until you specify the old one has ended and then create a new one. I also learned the importance of including text inside the html paragraph, hypertext, etc. Several times the link to my GitHub wasn't showing up because I forgot to include the word GitHub in the anchor, something that could be easily overlooked but key to what you want to do.
+
+For html: This is a style element that you should always include at the top of html files.
+<meta
+  name="viewport"
+  content=
+    "width=device-width, initial-scale=1"
+/>
