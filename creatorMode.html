@@ -10,28 +10,56 @@
         crossorigin="anonymous"
     />
     <body>
-        <section class="music-visual">
-            <table>
-                <tr>Instrument
-                    <select name="instrumentSelect" id="select">
-                        <option>Piano</option>
-                        <option>Guitar</option>
-                        <option>Xylophone</option>
-                        <option>Violin</option>
-                        <!--Add more options-->
-                    </select>
-                    <div class="instrument-visual">PLACEHOLDER</div> <!--Fix CSS-->
-                </tr>
-                <tr>Add Instrument
-                    <i class="bi bi-plus-lg"></i>
-                </tr>
-            </table>
-        </section>
-        <section>Length
-            <input type="number" placeholder="--" />s
-            <p>or</p>
-            <button class="input">PLACEHOLDER</button>
-            <span class="count">0.00 s</span> <!--FIXME will need to adjust for changing the time-->
-        </section>
+        <main>
+            <section class="music-visual">
+                <table>
+                    <tr>Instrument
+                        <select name="instrumentSelect" id="select">
+                            <option>Piano</option>
+                            <option>Guitar</option>
+                            <option>Xylophone</option>
+                            <option>Violin</option>
+                            <!--Add more options-->
+                        </select>
+                        <div class="instrument-visual">PLACEHOLDER</div> <!--Fix CSS-->
+                    </tr>
+                    <tr>Add Instrument
+                        <i class="bi bi-plus-lg"></i>
+                    </tr>
+                </table>
+            </section>
+            <section>Length
+                <input type="number" placeholder="--" />s
+                <p>or</p>
+                <button class="input">PLACEHOLDER</button>
+                <span class="count">0.00 s</span> <!--FIXME will need to adjust for changing the time-->
+            </section>
+            <section>Pitch
+                <div class="pitch-wheel">
+                    <div>C</div>
+                    <div>C#/Db</div>
+                    <div>D</div>
+                    <div>D#/Eb</div>
+                    <div>E</div>
+                    <div>F</div>
+                    <div>F#/Gb</div>
+                    <div>G</div>
+                    <div>G#/Ab</div>
+                    <div>A</div>
+                    <div>A#/Bb</div>
+                    <div>B</div>
+                    <div class="center-display">C4</div>
+                    <div class="select">PLACEHOLDER</div>
+                </div>
+            </section>
+        </main>
+        <br />
+        <footer>
+            <menu class="options">
+                <i class="bi bi-save"></i>
+                <i class="bi bi-upload"></i>
+                <i class="bi bi-play-fill"></i>
+            </menu>
+        </footer>
     </body>
 </html>
