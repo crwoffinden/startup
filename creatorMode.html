@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF"
+        crossorigin="anonymous"
+    />
+    <body>
+        <section class="music-visual">
+            <table>
+                <tr>Instrument
+                    <select name="instrumentSelect" id="select">
+                        <option>Piano</option>
+                        <option>Guitar</option>
+                        <option>Xylophone</option>
+                        <option>Violin</option>
+                        <!--Add more options-->
+                    </select>
+                    <div class="instrument-visual">PLACEHOLDER</div> <!--Fix CSS-->
+                </tr>
+                <tr>Add Instrument
+                    <i class="bi bi-plus-lg"></i>
+                </tr>
+            </table>
+        </section>
+        <section>Length
+            <input type="number" placeholder="--" />s
+            <p>or</p>
+            <button class="input">PLACEHOLDER</button>
+            <span class="count">0.00 s</span> <!--FIXME will need to adjust for changing the time-->
+        </section>
+    </body>
+</html>
