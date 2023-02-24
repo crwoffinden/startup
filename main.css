@@ -4,8 +4,10 @@
 }
 
 .title {
+    position: absolute;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3vw;
+    margin-left: 20px;
 }
 
 .login {
