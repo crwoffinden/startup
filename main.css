@@ -73,5 +73,6 @@
 
 .music-visual {
     position: absolute;
+    top: 80px;
     bottom: 50vw;
 }
