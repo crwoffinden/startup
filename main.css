@@ -25,9 +25,10 @@
 }
 
 .main-bar {
-    background-color: rgba(0, 0, 0, 0.616);
+    background-color: rgba(118, 124, 35, 0.329);
     color: white;
     position: absolute;
+    left: 0%;
     top: 0%;
     height: 50px;
     width: 100%;
