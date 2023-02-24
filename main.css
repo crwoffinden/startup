@@ -21,3 +21,17 @@
     background-color: rgb(216, 178, 216);
     font-size: 1em;
 }
+
+.main-bar {
+    background-color: rgba(0, 0, 0, 0.616);
+    color: white;
+    top: 0%;
+    height: 3vw;
+}
+
+.options {
+    flex: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: right;
+}
