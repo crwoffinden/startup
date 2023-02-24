@@ -67,6 +67,8 @@
 }
 
 .border {
+    position: absolute;
+    top: 50%;
     border-color: goldenrod;
 }
 
