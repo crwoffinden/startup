@@ -2,3 +2,14 @@
     background-color: rgb(46, 32, 46);
     color: white;
 }
+
+.title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1vw;
+}
+
+.login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
