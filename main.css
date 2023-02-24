@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20%;
+    margin-top: 5%;
 }
 
 .box-login {
@@ -23,5 +23,5 @@
 }
 
 .item-login {
-    padding: 20px;
+    padding-bottom: 20px;
 }
