@@ -13,13 +13,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5%;
-    padding-bottom: 1em;
+    margin-top: 10%;
+    padding-bottom: 50px;
 }
 
 .box-login {
-    border-radius: 10%;
-    height: 2em;
+    border-radius: 25%;
+    height: 1.5em;
     color: rgb(46, 32, 46);
 }
 
