@@ -69,6 +69,7 @@
 .border {
     position: absolute;
     top: 50vw;
+    height: 1px;
     border-color: goldenrod;
 }
 
