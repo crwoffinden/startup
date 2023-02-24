@@ -13,8 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    top: 8%;
+    margin-top: 8%;
 }
 
 .box-login {
