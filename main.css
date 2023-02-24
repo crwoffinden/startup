@@ -20,8 +20,9 @@
     border-radius: 10%;
     size: 2em;
     color: rgb(46, 32, 46);
+    padding-bottom: 1em;
 }
 
-.item-login {
+/*.item-login {
     padding-bottom: 20px;
-}
+}*/
