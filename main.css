@@ -38,7 +38,7 @@
     position: absolute;
     left: 0%;
     top: 0%;
-    height: 3vw;
+    height: 5vw;
     width: 100%;
 }
 
@@ -67,12 +67,13 @@
 }
 
 .border {
-    margin-top: 50vw;
+    position: absolute;
+    top: 50vw;
     border-color: goldenrod;
 }
 
 .music-visual {
     position: absolute;
-    top: 3vw;
+    top: 5vw;
     bottom: 50vw;
 }
