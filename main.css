@@ -29,7 +29,8 @@
     color: white;
     position: absolute;
     top: 0%;
-    height: 3vw;
+    height: 3%;
+    width: 100%;
 }
 
 .options {
