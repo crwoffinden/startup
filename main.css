@@ -65,3 +65,12 @@
     font-size: 1em;
     font-family: sans-serif;
 }
+
+.border {
+    color: goldenrod;
+}
+
+.music-visual {
+    position: absolute;
+    bottom: 50%;
+}
