@@ -13,15 +13,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 40%;
+    margin-top: 20%;
 }
 
 .box-login {
     border-radius: 10%;
-    size: 4em;
+    size: 2em;
     color: rgb(46, 32, 46);
 }
 
 .item-login {
-    padding: 2em;
+    padding: 20px;
 }
