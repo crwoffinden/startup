@@ -13,18 +13,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 8%;
+    position: absolute;
+    top: 8%;
 }
 
 .box-login {
     height: 1.5em;
     background-color: rgb(216, 178, 216);
     font-size: 1em;
+    position: absolute;
+    padding-bottom: 0.5em;
 }
 
 .main-bar {
     background-color: rgba(0, 0, 0, 0.616);
     color: white;
+    position: absolute;
     top: 0%;
     height: 3vw;
 }
