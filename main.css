@@ -5,7 +5,7 @@
 
 .title {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 5vw;
+    font-size: 3vw;
 }
 
 .login {
@@ -13,4 +13,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 40%;
+    padding: 1em;
+}
+
+.box-login {
+    border-radius: 90%;
+    size: 2em;
+    color: rgb(46, 32, 46);
 }
