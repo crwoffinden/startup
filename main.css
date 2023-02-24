@@ -50,17 +50,18 @@
 }
 
 .main-menu {
-    position: fixed;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 40%;
+    margin-top: 30%;
 }
 
 .menu-button {
     padding-top: 1em;
     padding-bottom: 1em;
-    width: 300px;
-    margin-bottom: 1em;
+    width: 400px;
+    margin-bottom: 2em;
+    font-size: 2em;
+    font-family: sans-serif;
 }
