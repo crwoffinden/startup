@@ -67,8 +67,7 @@
 }
 
 .border {
-    position: absolute;
-    top: 50%;
+    margin-top: 50%;
     border-color: goldenrod;
 }
 
