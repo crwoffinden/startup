@@ -67,11 +67,11 @@
 }
 
 .border {
-    margin-top: 50%;
+    margin-top: 50vw;
     border-color: goldenrod;
 }
 
 .music-visual {
     position: absolute;
-    bottom: 50%;
+    bottom: 50vw;
 }
