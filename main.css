@@ -16,14 +16,8 @@
     margin-top: 8%;
 }
 
-.items-login {
-    display: flex;
-    flex-direction: column;
-    padding-top: 1em;
-}
-
 .box-login {
-    border-radius: 20%;
+    border-radius: 15%;
     height: 1.5em;
     color: rgb(46, 32, 46);
     font-size: 1.5em;
