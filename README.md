@@ -25,3 +25,6 @@ For html: This is a style element that you should always include at the top of h
 />
 
 simon-css: Working with the css provided for simon has taught me a little bit more about what css will give you. Some of these elements included things like how stating the flex arrangement determines if elements will be arranged horizontally or vertically, as well as experimenting with different sizings and positionings. One trait that I also noticed was then when assigning classes to html elements, it gives you the freedom to make up labels based on what you want certain things to do, which can be helpful when you want different structural elements having a similar style. This flexibility isn't always desirable, though, as it can make it frustrating to decide how to accomplish your design.
+
+Notes: 2/24
+One thing I noticed is creating html for a design is a lot easier than creating css from scratch. With html, you know what you want the structure to look like, and can make the basic parts pretty easily. With css, you could cycle through several different options before deciding on a design you like, and it takes even more time to try and implement it in a way that fits your vision.
