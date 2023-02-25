@@ -102,3 +102,23 @@
     position: absolute;
     left: 100px;
 }
+
+.length {
+    display: flex;
+    position: absolute;
+    top: 50vw;
+    left: 0;
+    right: 50vw;
+    border-width: 2px;
+    border-color: goldenrod;
+}
+
+.pitch {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50vw;
+    left: 50vw;
+    border-width: 2px;
+    border-color: goldenrod;
+}
