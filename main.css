@@ -80,6 +80,8 @@
     position: absolute;
     top: 6vw;
     bottom: 50vw;
+    border-width: 2px 0;
+    border-color: goldenrod;
 }
 
 .instrument {
