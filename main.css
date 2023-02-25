@@ -173,4 +173,9 @@
 .list {
     align-items: center;
     width: 33vw;
+    font-size: 1em;
+}
+
+.list-item {
+    margin-bottom: 15px;
 }
