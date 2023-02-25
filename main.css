@@ -49,6 +49,10 @@
     align-items: right;
 }
 
+.bi {
+    padding-left: 5px;
+}
+
 .main-menu {
     flex: 1;
     display: flex;
