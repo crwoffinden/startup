@@ -148,3 +148,13 @@
     width: 60vw;
     margin-bottom: 20px;
 }
+
+.folders {
+    display: grid;
+    margin-left: 0;
+    margin-top: 5.5vw;
+}
+
+.folder {
+    width: 100vw;
+}
