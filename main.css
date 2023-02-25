@@ -157,4 +157,8 @@
 
 .folder {
     width: 100vw;
+    background-color: rgb(216, 178, 216);
+    border-color: black;
+    border-width: 2px 0;
+    font-size: 2vw;
 }
