@@ -145,6 +145,6 @@
 }
 
 .text-input {
-    max-width: 60vw;
-    padding-bottom: 20px;
+    width: 60vw;
+    margin-bottom: 20px;
 }
