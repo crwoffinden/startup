@@ -95,5 +95,10 @@
 
 #instrumentSelect {
     position: absolute;
-    margin-left: 20px;
+    left: 20px;
+}
+
+.instrument-visual {
+    position: absolute;
+    left: 100px;
 }
