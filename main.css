@@ -46,7 +46,7 @@
     flex: 0;
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: self-end;
 }
 
 .bi {
