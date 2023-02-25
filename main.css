@@ -162,3 +162,15 @@
     border-width: 2px 0;
     font-size: 2.5vw;
 }
+
+.lists {
+    flex: 0;
+    display: flex;
+    flex-direction: row;
+    margin-top: 8vw;
+}
+
+.list {
+    align-items: center;
+    width: 33vw;
+}
