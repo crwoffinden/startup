@@ -88,6 +88,7 @@
     flex: 0;
     display: flex;
     flex-direction: row;
+    height: 22vw;
     border-width: 2px 0;
     border-color: goldenrod;
 }
