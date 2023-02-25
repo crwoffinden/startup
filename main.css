@@ -105,6 +105,7 @@
 
 .length {
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: 50vw;
     left: 0;
@@ -115,7 +116,6 @@
 
 .pitch {
     display: flex;
-    flex-direction: column;
     position: absolute;
     top: 50vw;
     left: 50vw;
