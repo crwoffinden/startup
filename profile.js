@@ -1,11 +1,5 @@
 function fill() {
     const favorite = document.getElementById("favorite");
-    favorite.className = "bi bi-heart-fill"; 
-    favorite.onclick = "empty()";
-}
-
-function empty() {
-    const favorite = document.getElementById("favorite");
-    favorite.className = "bi bi-heart";
-    favorite.onclick = "fill()";
+    if (favorite.className = "bi bi-heart") favorite.className = "bi bi-heart-fill";
+    else if (favorite.className = "bi bi-heart-fill") favorite.className = "bi bi-heart"; 
 }
