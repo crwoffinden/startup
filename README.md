@@ -28,3 +28,16 @@ simon-css: Working with the css provided for simon has taught me a little bit mo
 
 Notes: 2/24
 One thing I noticed is creating html for a design is a lot easier than creating css from scratch. With html, you know what you want the structure to look like, and can make the basic parts pretty easily. With css, you could cycle through several different options before deciding on a design you like, and it takes even more time to try and implement it in a way that fits your vision.
+
+simon-javascript: Having this experience of working with the javascript has helped me understand a little more about its uses. A few things I noticed were; how JavaScript uses some of the values first created in HTML to passs values for other HTML or JavaScript files, how in JavaScript files you have the capability to write additional HTML code in real time, and the importance of the id keyword in html. in a way, the id keyword is creating a sort of global variable that both the CSS and JavaScript can manipulate. 
+
+Notes 3/6:
+Use CNAME as an alias to point your DNS to another DNS
+
+@import statement loads google fonts in CSS
+
+JSON is not JavaScript; you need to use quotes
+
+<javascript> is not valid html
+
+JavaScript objects require a colon
