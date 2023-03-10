@@ -20,26 +20,18 @@
             <h1 class="title">NoteLab</h1>
             <menu class="options">
                 <i class="bi bi-search"></i>
-                <i class="bi bi-person-circle">
-                    <a href="profile.html">Profile</a>
-                </i>
-                <!--<img src="profile.png" alt="bi bi-person-circle" />--> <!--Could be wrong-->
+                <i class="bi bi-person-circle" onclick="toProfile()"></i>
             </menu>
         </header>
         <main>
             <!--Insert New Project Screen Here figure this out-->
             <!--Figure out what tags to use-->
             <menu class="main-menu">
-                <button class="menu-button">
-                    <a href="newProject.html">New Project</a>
-                </button>
-                <button class="menu-button">
-                    <a href="myProjects.html">My Projects</a>
-                </button>
-                <button class="menu-button">
-                    <a href="whatsHot.html">What's Hot?</a>
-                </button>
+                <button class="menu-button" onclick="newProject()"></button>
+                <button class="menu-button" onclick="myProjects()"></button>
+                <button class="menu-button" onclick="whatsHot()"></button>
             </menu>
         </main>
+        <script src="menu.js"></script>
     </body>
 </html>
