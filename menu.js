@@ -1,5 +1,5 @@
 function toProfile() {
-    window.location.href = "menu.html";
+    window.location.href = "profile.html";
 }
 
 function newProject() {
