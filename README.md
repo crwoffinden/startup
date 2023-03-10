@@ -33,7 +33,11 @@ simon-javascript: Having this experience of working with the javascript has help
 
 Notes 3/6:
 Use CNAME as an alias to point your DNS to another DNS
+
 @import statement loads google fonts in CSS
+
 JSON is not JavaScript; you need to use quotes
+
 <javascript> is not valid html
+
 JavaScript objects require a colon
