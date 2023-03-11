@@ -140,17 +140,17 @@
     align-items: center;
 }
 
+
 .icon {
-    width: 10vw;
+    width: 15vw;
     height: 10vw;
     text-align: center;
     font-size: 90%;
+    margin-top: 2vw;
+    margin-left: 1vw;
 }
 
 .icon-C {
-    position: absolute;
-    top: 55vw;
-    left: 55vw;
     background-color: red;
 }
 
@@ -231,12 +231,17 @@
     background-color: hotpink;
 }
 
-.center-display {
+#current {
+    border-width: .5vw;
+    border-color: white;
+}
+
+/*.center-display {
     width: 150px;
     height: 150px;
     border-radius: 100%;
     background-color: black;
-}
+}*/
 
 .text {
     flex: 1;
