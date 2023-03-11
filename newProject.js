@@ -5,3 +5,11 @@ function select(chosen) {
         old.id = "";
     }
 }
+
+function toProfile() {
+    window.location.href = "profile.html";
+}
+
+function toUpload() {
+    window.location.href = "upload.html";
+}
