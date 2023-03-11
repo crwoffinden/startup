@@ -141,58 +141,92 @@
 }
 
 .icons {
-    display: grid;
-    width: 25vw;
-    height: 18.75vw;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    display: block;
+    width: 10vw;
+    height: 10vw;
 }
 
 .icon-C {
+    position: absolute;
+    top: 55vw;
+    left: 55vw;
     background-color: red;
 }
 
 .icon-C#Db {
+    position: absolute;
+    top: 55vw;
+    left: 70 vw;
     background-color: orangered;
 }
 
 .icon-D {
+    position: absolute;
+    top: 55vw;
+    left: 85vw;
     background-color: orange;
 }
 
 .icon-D#Eb {
+    position: absolute;
+    top: 66vw;
+    left: 55vw;
     background-color: #fa3;
 }
 
 .icon-E {
+    position: absolute;
+    top: 66vw;
+    left: 70vw;
     background-color: yellow;
 }
 
 .icon-F {
+    position: absolute;
+    top: 66vw;
+    left: 85vw;
     background-color: rgb(0, 255, 0)
 }
 
 .icon-F#Gb {
+    position: absolute;
+    top: 77vw;
+    left: 55vw;
     background-color: rgb(37, 122, 66);
 }
 
 .icon-G {
+    position: absolute;
+    top: 77vw;
+    left: 70vw;
     background-color: seagreen
 }
 
 .icon-G#Ab {
+    position: absolute;
+    top: 77vw;
+    left: 85vw;
     background-color: indigo;
 }
 
 .icon-A {
+    position: absolute;
+    top: 88vw;
+    left: 55vw;
     background-color: purple;
 }
 
 .icon-A#Bb {
+    position: absolute;
+    top: 88vw;
+    left: 70vw;
     background-color: magenta;
 }
 
 .icon-B {
+    position: absolute;
+    top: 88vw;
+    left: 85vw;
     background-color: hotpink;
 }
 
