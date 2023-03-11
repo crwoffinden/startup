@@ -140,12 +140,6 @@
     align-items: center;
 }
 
-.icons {
-    display: flex;
-    width: 50vw;
-    height: 50vw;
-}
-
 .icon {
     width: 10vw;
     height: 10vw;
