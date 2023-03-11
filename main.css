@@ -154,7 +154,7 @@
     background-color: red;
 }
 
-.icon-C#Db {
+.icon-C\#Db {
     position: absolute;
     top: 55vw;
     left: 70vw;
@@ -168,7 +168,7 @@
     background-color: orange;
 }
 
-.icon-D#Eb {
+.icon-D\#Eb {
     position: absolute;
     top: 66vw;
     left: 55vw;
@@ -189,7 +189,7 @@
     background-color: rgb(0, 255, 0)
 }
 
-.icon-F#Gb {
+.icon-F\#Gb {
     position: absolute;
     top: 77vw;
     left: 55vw;
@@ -203,7 +203,7 @@
     background-color: seagreen
 }
 
-.icon-G#Ab {
+.icon-G\#Ab {
     position: absolute;
     top: 77vw;
     left: 85vw;
@@ -217,7 +217,7 @@
     background-color: purple;
 }
 
-.icon-A#Bb {
+.icon-A\#Bb {
     position: absolute;
     top: 88vw;
     left: 70vw;
