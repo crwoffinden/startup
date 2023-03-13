@@ -26,11 +26,11 @@ function addInstrument() {
     const op3 = document.createElement('option');
     const op4 = document.createElement('option');
     const op5 = document.createElement('option');
-    op1.value = "Instrument";
-    op2.value = "Piano";
-    op3.value = "Guitar";
-    op4.value = "Xylophone";
-    op5.value = "Violin";
+    op1.innerHTML = "Instrument";
+    op2.innerHTML = "Piano";
+    op3.innerHTML = "Guitar";
+    op4.innerHTML = "Xylophone";
+    op5.innerHTML = "Violin";
     select.appendChild(op1);
     select.appendChild(op2);
     select.appendChild(op3);
