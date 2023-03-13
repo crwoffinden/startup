@@ -16,7 +16,8 @@ function toUpload() {
 
 function addInstrument() {
     const instruments = document.getElementById("instruments");
-    const rowEl = document.createElement('tr class="instrument"');
+    const rowEl = document.createElement('tr');
+    rowEl.className = "instrument";
     const select = document.createElement('select name="instrumentSelect" id="Select"');
     const op1 = document.createElement('option');
     const op2 = document.createElement('option');
