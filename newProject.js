@@ -16,5 +16,19 @@ function toUpload() {
 
 function addInstrument() {
     const instruments = document.getElementById("instruments");
-    instruments.innerHTML = "<tr class=\"instrument\">\n<select name=\"instrumentSelect\" id=\"select\">\n<option>Instrument</option>\n<option>Piano</option>\n<option>Guitar</option>\n<option>Xylophone</option>\n<option>Violin</option>\n</select>\n<div class=\"instrument-visual\">PLACEHOLDER</div> <!--Fix CSS--></tr>";
+    const rowEl = document.createElement('tr class="instrument"');
+    const select = document.createElement('select name="instrumentSelect" id="Select"');
+    const op1 = document.createElement('option');
+    const op2 = document.createElement('option');
+    const op3 = document.createElement('option');
+    const op4 = document.createElement('option');
+    const op5 = document.createElement('option');
+    select.appendChild("Instrument");
+    select.appendChild("Piano");
+    select.appendChild("Guitar");
+    select.appendChild("Xylophone")
+    select.appendChild("Violin");
+    rowEl.appendChild(select);
+    instruments.appendChild(rowEl);
+    
 }
