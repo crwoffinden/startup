@@ -18,7 +18,9 @@ function addInstrument() {
     const instruments = document.getElementById("instruments");
     const rowEl = document.createElement('tr');
     rowEl.className = "instrument";
-    const select = document.createElement('select name="instrumentSelect" id="Select"');
+    const select = document.createElement('select');
+    select.name = "instrumentSelect";
+    select.id = "Select";
     const op1 = document.createElement('option');
     const op2 = document.createElement('option');
     const op3 = document.createElement('option');
