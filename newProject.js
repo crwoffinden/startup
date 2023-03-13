@@ -26,11 +26,16 @@ function addInstrument() {
     const op3 = document.createElement('option');
     const op4 = document.createElement('option');
     const op5 = document.createElement('option');
-    select.appendChild("Instrument");
-    select.appendChild("Piano");
-    select.appendChild("Guitar");
-    select.appendChild("Xylophone")
-    select.appendChild("Violin");
+    op1.value = "Instrument";
+    op2.value = "Piano";
+    op3.value = "Guitar";
+    op4.value = "Xylophone";
+    op5.value = "Violin";
+    select.appendChild(op1);
+    select.appendChild(op2);
+    select.appendChild(op3);
+    select.appendChild(op4)
+    select.appendChild(op5);
     rowEl.appendChild(select);
     instruments.appendChild(rowEl);
     
