@@ -38,6 +38,15 @@ function addInstrument() {
     select.appendChild(op4)
     select.appendChild(op5);
     rowEl.appendChild(select);
+    const visual = document.createElement('div');
+    visual.className = "instrument-visual";
+    const block = document.createElement('div');
+    block.className = "block";
+    visual.appendChild(block);
+    visual.appendChild(block);
+    visual.appendChild(block);
+    visual.appendChild(block);
+    visual.appendChild(block);
     instruments.appendChild(rowEl);
     
 }
