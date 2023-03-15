@@ -20,16 +20,19 @@
             <h1 class="title">NoteLab</h1>
             <menu class="options">
                 <i class="bi bi-search"></i>
-                <i class="bi bi-person-circle">
-                    <a href="profile.html">Profile</a>
-                </i>
+                <i class="bi bi-person-circle" onclick="toProfile()"></i>
             </menu>
         </header>
         <main>
             <ul class="folders">
-                <li class="folder">Finished Songs</li>
-                <li class="folder">Unfinished Projects</li>
+                <li>
+                    <ul class="folder" id="finished">Finished Songs</ul>
+                </li>
+                <li>
+                    <ul class="folder">Unfinished Projects</ul>
+                </li>
             </ul>
         </main>
+        <script src="myProjects.js"></script>
     </body>
 </html>

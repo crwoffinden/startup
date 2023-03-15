@@ -84,6 +84,12 @@
     border-color: goldenrod;
 }
 
+#songTitle {
+    font-size: 1.5vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: goldenrod;
+}
+
 .instrument {
     flex: 0;
     display: flex;

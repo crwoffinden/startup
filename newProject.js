@@ -11,6 +11,7 @@ function toProfile() {
 }
 
 function toUpload() {
+    localStorage.setItem("url", window.location.href);
     window.location.href = "upload.html";
 }
 
