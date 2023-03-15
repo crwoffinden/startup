@@ -71,11 +71,6 @@
     font-family: sans-serif;
 }
 
-.border {
-    margin-top: 50vw;
-    border-color: goldenrod;
-}
-
 .music-visual {
     position: absolute;
     top: 6vw;
