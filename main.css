@@ -104,7 +104,18 @@
 .instrument-visual {
     position: absolute;
     left: 100px;
-    display: grid;
+    display: flex;
+    flex-direction: row;
+}
+
+.block {
+    background-color: lightgray;
+    width: 100px;
+    height: 25px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-color: gray;
 }
 
 .length {
