@@ -41,3 +41,5 @@ JSON is not JavaScript; you need to use quotes
 <javascript> is not valid html
 
 JavaScript objects require a colon
+
+simon-startup: One thing I find cool about the servers is the concept of creating objects that get stored in the router, and subsequently saved on more than just the computer, but the entire internet. I'm also impressed by how functions can be created that directly interact with these objects. It basically allows the server to extend the code processing to the whole internet whenever you feel it needs to, and this long-range interaction is key to making most things work online.
