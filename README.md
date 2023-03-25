@@ -42,4 +42,6 @@ JSON is not JavaScript; you need to use quotes
 
 JavaScript objects require a colon
 
-simon-startup: One thing I find cool about the servers is the concept of creating objects that get stored in the router, and subsequently saved on more than just the computer, but the entire internet. I'm also impressed by how functions can be created that directly interact with these objects. It basically allows the server to extend the code processing to the whole internet whenever you feel it needs to, and this long-range interaction is key to making most things work online.
+simon-server: One thing I find cool about the servers is the concept of creating objects that get stored in the router, and subsequently saved on more than just the computer, but the entire internet. I'm also impressed by how functions can be created that directly interact with these objects. It basically allows the server to extend the code processing to the whole internet whenever you feel it needs to, and this long-range interaction is key to making most things work online.
+
+simon-db: One thing I learned was the idea of creating an object id in databases. This will be really helpful when trying to use specific instances of objects, as the object id is an easy way to connect related objects, more specifically objects that belong to the same person, and makes it easy to single out an object if you need to modify it.
