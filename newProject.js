@@ -3,6 +3,7 @@ function select(chosen) {
     if (old !== chosen) {
         chosen.id = "current";
         old.id = "";
+        block.changePitch(chosen.className); //FIXME this could be the wrong one to use
     }
 }
 
@@ -48,5 +49,30 @@ function addInstrument() {
     visual.appendChild(block);
     visual.appendChild(block);
     instruments.appendChild(rowEl);
-    
 }
+
+function press() {
+    //innerHTML
+    //block.changeValue
+}
+
+function addBlock() 
+
+function createBlock()
+
+class block {
+    constructor(pitch, length) {
+        this.pitch = pitch;
+        this.length = length;
+    }
+
+    changePitch(newPitch) {
+        this.pitch = newPitch;
+    }
+
+    changeValue() {
+
+    }
+}
+
+let block = block(document.getElementById('current').className, document.getElementById('hold').value);

@@ -33,21 +33,25 @@
             <section class="music-visual">
                 <table id="instruments">
                     <tr class="instrument">
-                        <select name="instrumentSelect" id="select">
-                            <option>Instrument</option>
-                            <option>Piano</option>
-                            <option>Guitar</option>
-                            <option>Xylophone</option>
-                            <option>Violin</option>
-                            <!--Add more options-->
-                        </select>
-                        <div class="instrument-visual">
-                            <div class="block"></div>
-                            <div class="block"></div>
-                            <div class="block"></div>
-                            <div class="block"></div>
-                            <div class="block"></div>
-                        </div> <!--Fix CSS-->
+                        <td>
+                            <select name="instrumentSelect" id="select">
+                                <option>Instrument</option>
+                                <option>Piano</option>
+                                <option>Guitar</option>
+                                <option>Xylophone</option>
+                                <option>Violin</option>
+                                <!--Add more options-->
+                            </select>
+                        </td>
+                        <td>
+                            <div class="instrument-visual">
+                                <div class="block"></div>
+                                <div class="block"></div>
+                                <div class="block"></div>
+                                <div class="block"></div>
+                                <div class="block"></div>
+                            </div> <!--Fix CSS-->
+                        </td>
                     </tr>
                     <tr class="instrument">Add Instrument
                         <i class="bi bi-plus-lg" onclick="addInstrument()"></i>
@@ -64,24 +68,24 @@
                 <div class="pitch-wheel">
                     <table class="icons"> <!--Figure out how to make the wheel-->
                         <tr class="row">
-                            <div class="icon icon-C" id="current" onclick="select(this)">C</div>
-                            <div class="icon icon-C#Db" onclick="select(this)">C#/Db</div>
-                            <div class="icon icon-D" onclick="select(this)">D</div>
+                            <div class="icon C" id="current" onclick="select(this)">C</div>
+                            <div class="icon C#Db" onclick="select(this)">C#/Db</div>
+                            <div class="icon D" onclick="select(this)">D</div>
                         </tr>
                         <tr class="row">
-                            <div class="icon icon-D#Eb" onclick="select(this)">D#/Eb</div>
-                            <div class="icon icon-E" onclick="select(this)">E</div>
-                            <div class="icon icon-F" onclick="select(this)">F</div>
+                            <div class="icon D#Eb" onclick="select(this)">D#/Eb</div>
+                            <div class="icon E" onclick="select(this)">E</div>
+                            <div class="icon F" onclick="select(this)">F</div>
                         </tr>
                         <tr class="row">
-                            <div class="icon icon-F#Gb" onclick="select(this)">F#/Gb</div>
-                            <div class="icon icon-G" onclick="select(this)">G</div>
-                            <div class="icon icon-G#Ab" onclick="select(this)">G#/Ab</div>
+                            <div class="icon F#Gb" onclick="select(this)">F#/Gb</div>
+                            <div class="icon G" onclick="select(this)">G</div>
+                            <div class="icon G#Ab" onclick="select(this)">G#/Ab</div>
                         </tr>
                         <tr class="row">
-                            <div class="icon icon-A" onclick="select(this)">A</div>
-                            <div class="icon icon-A#Bb" onclick="select(this)">A#/Bb</div>
-                            <div class="icon icon-B" onclick="select(this)">B</div>
+                            <div class="icon A" onclick="select(this)">A</div>
+                            <div class="icon A#Bb" onclick="select(this)">A#/Bb</div>
+                            <div class="icon B" onclick="select(this)">B</div>
                         </tr>
                     </table>
                     <!--<div class="center-display">C4</div>
