@@ -56,9 +56,13 @@ function press() {
     //block.changeValue
 }
 
-function addBlock() 
+function addBlock() {
 
-function createBlock()
+}
+
+function createBlock() {
+    
+}
 
 class block {
     constructor(pitch, length) {
