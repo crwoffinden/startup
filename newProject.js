@@ -76,10 +76,10 @@ class block {
 
 function pressAndHold(button) {
     let time = 0;
-    let start = 0;
+    let start = new Date();
     let end = 0;
 
-    addEventListener('mousedown', start = new Date());
+    //addEventListener('mousedown', start = new Date());
     addEventListener('mouseup', end = new Date());
     time = end - start;
     if (time > 10000) time = 10000;
