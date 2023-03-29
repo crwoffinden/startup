@@ -77,8 +77,8 @@ class block {
 function pressAndHold(button) {
     var time;
     let start = 0;
-    $(button).mousedown(function() {start = new Date();});
-    $(button).mouseup(function() {
+    button.mousedown(function() {start = new Date();});
+    button.mouseup(function() {
         let end = new Date();
         time = end - start;
         if (time > 10000) time = 10000;
