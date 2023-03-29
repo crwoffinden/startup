@@ -75,15 +75,16 @@ class block {
 }
 
 function pressAndHold(button) {
-    var time;
+    let time = 0;
     let start = 0;
-    button.mousedown(function() {start = new Date();});
-    button.mouseup(function() {
+
+    button.addEventListener('mousedown', start = new Date());
+    button.addEventListener('mouseup', function() {
         let end = new Date();
         time = end - start;
         if (time > 10000) time = 10000;
-        time = time / 1000.0
-    })
+        time = time / 1000.0;
+    });
     document.getElementById('length-input').value = time;
 }
 
