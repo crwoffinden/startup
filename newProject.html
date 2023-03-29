@@ -60,8 +60,8 @@
             </section>
             <section class="length">
                 <p>Length</p>
-                <input type="number" class="length-input" placeholder="--" />seconds
-                <button class="press" id="hold" onclick="pressAndHold"></button>
+                <input type="number" id="length-input" placeholder="--" min="0.0" max="10.0" />seconds
+                <button class="press" id="hold" onclick="pressAndHold(this)"></button>
             </section>
             <section class="pitch">
                 <p>Pitch</p>

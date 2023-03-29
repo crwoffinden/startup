@@ -130,7 +130,7 @@
     align-items: center;
 }
 
-.length-input {
+#length-input {
     max-width: 80px;
 }
 

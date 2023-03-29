@@ -3,7 +3,6 @@ function select(chosen) {
     if (old !== chosen) {
         chosen.id = "current";
         old.id = "";
-        block.changePitch(chosen.className); //FIXME this could be the wrong one to use
     }
 }
 
@@ -56,17 +55,16 @@ function addInstrument() {
     instruments.appendChild(rowEl);
 }
 
-function press() {
-    //innerHTML
-    //block.changeValue
-}
-
-function addBlock() {
-
-}
-
-function createBlock() {
-
+function addBox() {
+    const instruments = document.getElementById('instruments');
+    const rows = instruments.getElementsByTagName('tr');
+    const numRows = rows.length - 1;
+    for (i = 0; i < numRows; ++i) {
+        const currBar  = rows[i].getElementById('instrument-visual');
+        const box = document.createElement('div');
+        box.className = 'block';
+        currBar.appendChild(box);
+    }
 }
 
 class block {
@@ -74,14 +72,28 @@ class block {
         this.pitch = pitch;
         this.length = length;
     }
-
-    changePitch(newPitch) {
-        this.pitch = newPitch;
-    }
-
-    changeValue() {
-
-    }
 }
 
-let block = block(document.getElementById('current').className, document.getElementById('hold').value);
+function pressAndHold(button) {
+    var time;
+    let start = 0;
+    $(button).mousedown(function() {start = new Date();});
+    $(button).mouseup(function() {
+        let end = new Date();
+        time = end - start;
+        if (time > 10000) time = 10000;
+        time = time / 1000.0
+    })
+    document.getElementById('length-input').value = time;
+}
+
+function addBlock() {
+    const block = createBlock();
+}
+
+function createBlock() {
+    const block = new block(document.getElementById('current').className, document.getElementById('length-input').value);
+    return block;
+}
+
+
