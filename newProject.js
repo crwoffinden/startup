@@ -20,6 +20,7 @@ function addInstrument() {
     const instruments = document.getElementById("instruments");
     const rowEl = document.createElement('tr');
     rowEl.className = "instrument";
+    const menu = document.createElement('td');
     const select = document.createElement('select');
     select.name = "instrumentSelect";
     select.id = "Select";
@@ -36,9 +37,11 @@ function addInstrument() {
     select.appendChild(op1);
     select.appendChild(op2);
     select.appendChild(op3);
-    select.appendChild(op4)
+    select.appendChild(op4);
     select.appendChild(op5);
-    rowEl.appendChild(select);
+    menu.appendChild(select);
+    rowEl.appendChild(menu);
+    const bar = document.createElement('td');
     const visual = document.createElement('div');
     visual.className = "instrument-visual";
     const block = document.createElement('div');
@@ -48,6 +51,8 @@ function addInstrument() {
     visual.appendChild(block);
     visual.appendChild(block);
     visual.appendChild(block);
+    bar.appendChild(visual);
+    rowEl.appendChild.bar;
     instruments.appendChild(rowEl);
 }
 
@@ -61,7 +66,7 @@ function addBlock() {
 }
 
 function createBlock() {
-    
+
 }
 
 class block {
