@@ -48,3 +48,4 @@ simon-db: One thing I learned was the idea of creating an object id in databases
 
 simon-login: One interesting thing I found with this part of the code is the use of the email related to the authtoken, not just for login, but to also fetch the scores for the player. In doing this, it allows you to utilize the authtoken to get the user specific data that only the user should be able to see, making it all the more valuable. It is an extremely powerful tool that will be necessary to get anything belonging to the user in the database.
   
+simon-websocket: One thing I found interesting was the idea that the WebSocket is keeping track of multiple connections simultaneously. Whenever one connection needs to take an action, it can pull that specific one out of the array, and work with it there. This is useful in allowing all people connected to the server to be able to see the dialogue and interactions.
