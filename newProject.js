@@ -75,13 +75,15 @@ class block {
 }
 
 async function mouseup() {
-    return new Date();
+    return new Promise((resolve) => {
+        resolve(new Date());
+    });
 }
 
-function pressAndHold(button) {
+async function pressAndHold(button) {
     let time = 0;
     const start = new Date();
-    const end = await(mouseup());
+    const end = await mouseup();
 
     time = end - start;
     if (time > 10000) time = 10000;
