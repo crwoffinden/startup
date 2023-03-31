@@ -83,11 +83,13 @@ async function mouseup() {
 async function pressAndHold(button) {
     let time = 0;
     const start = new Date();
-    const end = await mouseup();
-
-    time = end - start;
+    const end = await mouseup()
+    .then ((end) => time = end - start)
+    .then ((time) => {if (time > 10000) time = 10000})
+    .finally ((time) => time = time / 1000.0);
+    /*time = end - start;
     if (time > 10000) time = 10000;
-    time = time / 1000.0;
+    time = time / 1000.0;*/
 
     document.getElementById('length-input').value = time;
 }
