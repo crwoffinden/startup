@@ -130,6 +130,10 @@
     align-items: center;
 }
 
+#bpm {
+    max-width: 80px;
+}
+
 #length-input {
     max-width: 80px;
 }

@@ -67,31 +67,30 @@ function addBox() {
     }
 }
 
-class block {
+class note {
     constructor(pitch, length) {
         this.pitch = pitch;
         this.length = length;
     }
 }
 
-async function mouseup() {
-    return new Promise((resolve) => {
-        resolve(new Date());
-    });
+function lift() {
+    end = new Date;
+    setTime();
 }
 
-async function pressAndHold(button) {
-    let time = 0;
-    const start = new Date();
-    const end = await mouseup();
-    /*.then ((end) => time = end - start)
-    .then ((time) => {if (time > 10000) time = 10000})
-    .finally ((time) => time = time / 1000.0);*/
-    time = end - start;
-    if (time > 10000) time = 10000;
-    time = time / 1000.0;
+function press() {
+    start = new Date();
+}
 
-    document.getElementById('length-input').value = time;
+function setTime() {
+    let time = end - start;
+    if (time > 10000) time = 10000;
+    const bpm = document.getElementById('bpm').value;
+    let beats = time * bpm / 60000;
+    let length = document.getElementById('length-input');
+    beats = Math.round(beats * 4) / 4;
+    length.value = (beats);
 }
 
 function addBlock() {
@@ -103,4 +102,7 @@ function createBlock() {
     return block;
 }
 
+var start;
+
+var end;
 

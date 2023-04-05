@@ -62,8 +62,9 @@
             </section>
             <section class="length">
                 <p>Length</p>
-                <input type="number" id="length-input" placeholder="--" min="0.0" max="10.0" />seconds
-                <button class="press" id="hold" onclick="pressAndHold(this)"></button>
+                <input type="number" id="bpm" value="60" min="0"/>bpm
+                <input type="number" id="length-input" placeholder="--" min="0" />beats
+                <button class="press" id="hold" onmousedown="press()" onmouseup="lift()"></button>
             </section>
             <section class="pitch">
                 <p>Pitch</p>
