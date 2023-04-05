@@ -1,8 +1,8 @@
 function select(chosen) {
-    const old = document.getElementById("current");
+    const old = document.getElementById("icon-current");
     if (old !== chosen) {
-        chosen.id = "current";
-        old.id = "";
+        chosen.id = "icon-current";
+        old.id = "icon";
     }
 }
 
@@ -72,6 +72,20 @@ class note {
         this.pitch = pitch;
         this.length = length;
     }
+
+    getLength() {
+        return this.length;
+    }
+    
+    split(position, newNote) {
+        const firstNote = new note(this.pitch, position);
+        const newNotes = [firstNote, newNote];
+        if (newNote.getLength() + position < this.length) {
+            const lastNote = new note(this.pitch, (this.length - (newNote.getLength() + position)));
+            newNotes.push(lastNote);
+        }
+        return newNotes;
+    }
 }
 
 function lift() {
@@ -100,6 +114,38 @@ function addBlock() {
 function createBlock() {
     const block = new block(document.getElementById('current').className, document.getElementById('length-input').value);
     return block;
+}
+
+function addNote(instrument, position) {
+    const newNote = new Note(document.getElementById('icon-current').className, document.getElementById('length-input').value);
+    intstrument.addNote(position, newNote) = instrument.getNotes
+}
+
+class musicNotes {
+    constructor() {
+        notes[1];
+        notes[0] = new Note(null, 5);
+    }
+
+    addNote(position, newNote) {
+        var alteredNote
+        let length = 0;
+        let buffer = 0;
+        let i = 0;
+        while (length < position) {
+            alteredNote = this.notes[i];
+            buffer = length;
+            length += alteredNote.getLength;
+            ++i;
+        }
+        i -= 1;
+        const newNotes = alteredNote.split(buffer, newNote);
+        if (newNotes.length === 3) {
+            this.notes.splice(i, 1, newNotes[0], newNotes[1], newNotes[2]);
+        } else {
+            this.notes.splice(i, 1, newNotes[0], newNotes[1]);
+        }
+    }
 }
 
 var start;
