@@ -16,7 +16,9 @@ function toUpload() {
 }
 
 function addInstrument() {
-    const instruments = document.getElementById("instruments");
+    instruments.push(new MusicNotes('Instrument'));
+    display();
+    /*const instruments = document.getElementById("instruments");
     const rowEl = document.createElement('tr');
     rowEl.className = "instrument";
     const menu = document.createElement('td');
@@ -52,7 +54,7 @@ function addInstrument() {
     visual.appendChild(box);
     bar.appendChild(visual);
     rowEl.appendChild.bar;
-    instruments.appendChild(rowEl);
+    instruments.appendChild(rowEl);*/
 }
 
 function addBox() {
@@ -67,24 +69,18 @@ function addBox() {
     }
 }
 
-class note {
+class Note {
     constructor(pitch, length) {
         this.pitch = pitch;
         this.length = length;
     }
 
+    getPitch() {
+        return this.pitch;
+    }
+
     getLength() {
         return this.length;
-    }
-    
-    split(position, newNote) {
-        const firstNote = new note(this.pitch, position);
-        const newNotes = [firstNote, newNote];
-        if (newNote.getLength() + position < this.length) {
-            const lastNote = new note(this.pitch, (this.length - (newNote.getLength() + position)));
-            newNotes.push(lastNote);
-        }
-        return newNotes;
     }
 }
 
@@ -107,45 +103,112 @@ function setTime() {
     length.value = (beats);
 }
 
-function addBlock() {
-    const block = createBlock();
-}
-
-function createBlock() {
-    const block = new block(document.getElementById('current').className, document.getElementById('length-input').value);
-    return block;
-}
-
-function addNote(instrument, position) {
+function addNote(row, position) {
+    const instrument = instruments[row];
     const newNote = new Note(document.getElementById('icon-current').className, document.getElementById('length-input').value);
-    intstrument.addNote(position, newNote) = instrument.getNotes
+    instrument.addNote(position, newNote);
 }
 
-class musicNotes {
-    constructor() {
-        notes[1];
-        notes[0] = new Note(null, 5);
+function split(position, oldNotes, newNote, fullLength) {
+    const firstNote = new Note(oldNotes[0].getPitch(), position);
+    const lastNote = new Note(oldNotes[oldNotes.length - 1].getPitch(), (fullLength - ((position * 1) + (newNote.getLength() * 1))));
+    const newNotes = [];
+    if (firstNote.getLength() !== 0) newNotes.push(firstNote);
+    newNotes.push(newNote);
+    if (lastNote.getLength() !== 0) newNotes.push(lastNote);
+    return newNotes;
+}
+
+class MusicNotes {
+    notes = [new Note(null, 5)];
+    constructor(instrument) {
+        this.instrument = instrument;        
     }
 
     addNote(position, newNote) {
-        var alteredNote
+        var alteredNote;
         let length = 0;
         let buffer = 0;
         let i = 0;
+        alteredNote = this.notes[i];
         while (length < position) {
             alteredNote = this.notes[i];
             buffer = length;
-            length += alteredNote.getLength;
+            length += alteredNote.getLength();
             ++i;
         }
-        i -= 1;
-        const newNotes = alteredNote.split(buffer, newNote);
+        if (i > 0) --i;
+        let notePosition = position - buffer;
+        let alteredLength = alteredNote.getLength() - notePosition;
+        let j = i;
+        while (alteredLength < newNote.getLength() && j < (this.notes.length - 1)) {
+            ++j;
+            alteredNote = this.notes[j];
+            alteredLength += alteredNote.getLength();
+        }
+        if (alteredLength < newNote.getLength()) {
+            this.notes.push(new Note(null, (newNote.getLength() - alteredLength + 1)));
+            alteredLength = newNote.getLength() * 1 + 1;
+            ++j;
+        }
+        alteredLength += notePosition;
+        let replacedNotes = this.notes.slice(i, (j + 1));
+        const newNotes = split(notePosition, replacedNotes, newNote, alteredLength);
+        this.notes.splice(i, replacedNotes.length, ...newNotes);
+        /*const newNotes = splitFront(notePosition, alteredNote, newNote);
+        if (newNotes.length < 3) {
+            
+            let count = 1;
+            let j = i + 1;
+            while (alteredLength < newNote.getLength()) {
+                ++j;
+                alteredNote = this.notes[j];
+                buffer = alteredLength;
+                alteredLength += alteredNote.getLength();
+                count += 1;
+            }
+            if (alteredLength !== newNote.getLength()) {
+                notePosition = newNote.getLength() - buffer;
+                newNotes.push(splitEnd(notePosition, alteredNote))
+            }
+        }
         if (newNotes.length === 3) {
             this.notes.splice(i, 1, newNotes[0], newNotes[1], newNotes[2]);
         } else {
-            this.notes.splice(i, 1, newNotes[0], newNotes[1]);
-        }
+            this.notes.splice(i, count, newNotes[0], newNotes[1]);
+        }*/
+
+        if (this.notes[this.notes.length - 1].getPitch() !== null) this.notes.push(new Note(null, 1));
+        display();
     }
+
+    display(row) {
+        let html = "<td><div class=\"instrument-visual\">";
+        let k = 0;
+        for (let i = 0; i < this.notes.length; ++i) {    
+            for (let j = 0; j < this.notes[i].getLength(); j += 0.25) {
+                html += "<div class=\"block";
+                if (this.notes[i].getPitch() != null) html += " " + this.notes[i].getPitch();
+                html += "\" onclick=\"addNote(" + row  + ", " + k + ")\"></div>";
+                k += 0.25;
+            }
+        }
+        html += "</div></td></tr>";
+        return html; 
+    }
+}
+
+const instruments = [new MusicNotes('Instrument')];
+
+function display() {
+    let html = "";
+    for (let i = 0; i < instruments.length; ++i) {
+        html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select\"><option>Instrument</option><option>Piano</option><option>Guitar</option><option>Xylophone</option><option>Violin</option></select></td>";
+        html += instruments[i].display(i);
+    }
+    html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
+    let instrumentTable = document.getElementById("instruments");
+    instrumentTable.innerHTML = html;
 }
 
 var start;
