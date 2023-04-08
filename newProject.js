@@ -31,8 +31,8 @@ function sound(instrument, pitch) {
 async function playNote(instrument, pitch, time) {
     if (pitch !== null) {
         const audio = sound(instrument, pitch);
-        if (audio.src === "Violin/C.wav" || audio.src === "Violin/F.wav") audio.currentTime = 0.5;
-        else if (audio.src === "Violin/E.wav" || audio.src === "Violin/F#Gb.wav" || audio.src === 'Violin/G#Ab.wav') audio.currentTime = 0.25;
+        if (audio.src === "https://startup.crwoffinden.click/Violin/C.wav" || audio.src === "https://startup.crwoffinden.click/Violin/F.wav") audio.currentTime = 0.5;
+        else if (audio.src === "https://startup.crwoffinden.click/Violin/E.wav" || audio.src === "https://startup.crwoffinden.click/Violin/F#Gb.wav" || audio.src === 'https://startup.crwoffinden.click/Violin/G#Ab.wav') audio.currentTime = 0.25;
         else audio.currentTime = 0;
         audio.play();
         await delay(time);
@@ -150,7 +150,13 @@ class MusicNotes {
     }
 
     display(row) {
-        let html = "<td><div class=\"instrument-visual\">";
+        let html = "<option value=\"Piano\" ";
+        if (this.instrument === "Piano") html += "selected";
+        html += ">Piano</option><option value=\"Xylophone\" "
+        if (this.instrument === "Xylophone") html += "selected"; 
+        html += ">Xylophone</option><option value=\"Violin\" ";
+        if (this.instrument === "Violin") html += "selected"
+        html += ">Violin</option></select></td><td><div class=\"instrument-visual\">";
         let k = 0;
         for (let i = 0; i < this.notes.length; ++i) {    
             for (let j = 0; j < this.notes[i].getLength(); j += 0.25) {
@@ -180,7 +186,7 @@ function adjustAll(length) {
 function display() {
     let html = "";
     for (let i = 0; i < instruments.length; ++i) {
-        html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\"><option value=\"Piano\">Piano</option><option value=\"Xylophone\">Xylophone</option><option value=\"Violin\">Violin</option></select></td>";
+        html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\">";
         html += instruments[i].display(i);
     }
     html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
