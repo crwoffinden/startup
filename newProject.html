@@ -21,7 +21,7 @@
             <menu class="options">
                 <i class="bi bi-save"></i>
                 <i class="bi bi-upload" onclick="toUpload()"></i>
-                <i class="bi bi-play-fill"></i>
+                <i class="bi bi-play-fill" onclick="play()"></i>
                 <i class="bi bi-search"></i>
                 <i class="bi bi-person-circle" onclick="toProfile()"></i>
             </menu>
@@ -34,12 +34,10 @@
                 <table id="instruments">
                     <tr class="instrument">
                         <td>
-                            <select name="instrumentSelect" id="select">
-                                <option>Instrument</option>
-                                <option>Piano</option>
-                                <option>Guitar</option>
-                                <option>Xylophone</option>
-                                <option>Violin</option>
+                            <select name="instrumentSelect" id="select0" onchange="changeInstrument(0)">
+                                <option value="Piano">Piano</option>
+                                <option value="Xylophone">Xylophone</option>
+                                <option value="Violin">Violin</option>
                             </select>
                         </td>
                         <td>

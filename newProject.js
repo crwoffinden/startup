@@ -12,61 +12,33 @@ function toProfile() {
 
 function toUpload() {
     localStorage.setItem("url", window.location.href);
+    localStorage.setItem('title', JSON.stringify(getElementById('songTitle').value));
     window.location.href = "upload.html";
 }
 
 function addInstrument() {
-    instruments.push(new MusicNotes('Instrument'));
+    instruments.push(new MusicNotes('Piano'));
     display();
-    /*const instruments = document.getElementById("instruments");
-    const rowEl = document.createElement('tr');
-    rowEl.className = "instrument";
-    const menu = document.createElement('td');
-    const select = document.createElement('select');
-    select.name = "instrumentSelect";
-    select.id = "Select";
-    const op1 = document.createElement('option');
-    const op2 = document.createElement('option');
-    const op3 = document.createElement('option');
-    const op4 = document.createElement('option');
-    const op5 = document.createElement('option');
-    op1.innerHTML = "Instrument";
-    op2.innerHTML = "Piano";
-    op3.innerHTML = "Guitar";
-    op4.innerHTML = "Xylophone";
-    op5.innerHTML = "Violin";
-    select.appendChild(op1);
-    select.appendChild(op2);
-    select.appendChild(op3);
-    select.appendChild(op4);
-    select.appendChild(op5);
-    menu.appendChild(select);
-    rowEl.appendChild(menu);
-    const bar = document.createElement('td');
-    const visual = document.createElement('div');
-    visual.className = "instrument-visual";
-    const box = document.createElement('div');
-    box.className = "block";
-    visual.appendChild(box);
-    visual.appendChild(box);
-    visual.appendChild(box);
-    visual.appendChild(box);
-    visual.appendChild(box);
-    bar.appendChild(visual);
-    rowEl.appendChild.bar;
-    instruments.appendChild(rowEl);*/
 }
 
-function addBox() {
-    const instruments = document.getElementById('instruments');
-    const rows = instruments.getElementsByTagName('tr');
-    const numRows = rows.length - 1;
-    for (i = 0; i < numRows; ++i) {
-        const currBar  = rows[i].getElementById('instrument-visual');
-        const box = document.createElement('div');
-        box.className = 'block';
-        currBar.appendChild(box);
+function sound(instrument, pitch) {
+    var end;
+    if (instrument === "Piano") end = ".mp3";
+    else end = ".wav";
+    return new Audio(instrument + '/' + pitch + end);
+}
+
+async function playNote(instrument, pitch, time) {
+    if (pitch !== null) {
+        const audio = sound(instrument, pitch);
+        if (audio.src === "Violin/C.wav" || audio.src === "Violin/F.wav") audio.currentTime = 0.5;
+        else if (audio.src === "Violin/E.wav" || audio.src === "Violin/F#Gb.wav" || audio.src === 'Violin/G#Ab.wav') audio.currentTime = 0.25;
+        else audio.currentTime = 0;
+        audio.play();
+        await delay(time);
+        audio.pause();
     }
+    else await delay(time);
 }
 
 class Note {
@@ -95,7 +67,7 @@ function press() {
 
 function setTime() {
     let time = end - start;
-    if (time > 10000) time = 10000;
+    if (time > 2000) time = 2000;
     const bpm = document.getElementById('bpm').value;
     let beats = time * bpm / 60000;
     let length = document.getElementById('length-input');
@@ -125,6 +97,23 @@ class MusicNotes {
         this.instrument = instrument;        
     }
 
+    changeInstrument(row) {
+        const newInstrument = document.getElementById('select' + row);
+        this.instrument = newInstrument.options[newInstrument.selectedIndex].text;
+    }
+
+    getInstrument() {
+        return this.instrument;
+    }
+
+    getNotes() {
+        return this.notes;
+    }
+
+    adjust(length) {
+        this.notes.push(new Note(null, length));
+    }
+
     addNote(position, newNote) {
         var alteredNote;
         let length = 0;
@@ -134,7 +123,7 @@ class MusicNotes {
         while (length < position) {
             alteredNote = this.notes[i];
             buffer = length;
-            length += alteredNote.getLength();
+            length += (alteredNote.getLength() * 1);
             ++i;
         }
         if (i > 0) --i;
@@ -144,10 +133,10 @@ class MusicNotes {
         while (alteredLength < newNote.getLength() && j < (this.notes.length - 1)) {
             ++j;
             alteredNote = this.notes[j];
-            alteredLength += alteredNote.getLength();
+            alteredLength += (alteredNote.getLength() * 1);
         }
         if (alteredLength < newNote.getLength()) {
-            this.notes.push(new Note(null, (newNote.getLength() - alteredLength + 1)));
+            adjustAll(newNote.getLength() - alteredLength + 1);
             alteredLength = newNote.getLength() * 1 + 1;
             ++j;
         }
@@ -155,29 +144,7 @@ class MusicNotes {
         let replacedNotes = this.notes.slice(i, (j + 1));
         const newNotes = split(notePosition, replacedNotes, newNote, alteredLength);
         this.notes.splice(i, replacedNotes.length, ...newNotes);
-        /*const newNotes = splitFront(notePosition, alteredNote, newNote);
-        if (newNotes.length < 3) {
-            
-            let count = 1;
-            let j = i + 1;
-            while (alteredLength < newNote.getLength()) {
-                ++j;
-                alteredNote = this.notes[j];
-                buffer = alteredLength;
-                alteredLength += alteredNote.getLength();
-                count += 1;
-            }
-            if (alteredLength !== newNote.getLength()) {
-                notePosition = newNote.getLength() - buffer;
-                newNotes.push(splitEnd(notePosition, alteredNote))
-            }
-        }
-        if (newNotes.length === 3) {
-            this.notes.splice(i, 1, newNotes[0], newNotes[1], newNotes[2]);
-        } else {
-            this.notes.splice(i, count, newNotes[0], newNotes[1]);
-        }*/
-
+        
         if (this.notes[this.notes.length - 1].getPitch() !== null) this.notes.push(new Note(null, 1));
         display();
     }
@@ -198,17 +165,53 @@ class MusicNotes {
     }
 }
 
-const instruments = [new MusicNotes('Instrument')];
+const instruments = [new MusicNotes('Piano')];
+
+function changeInstrument(row) {
+    instruments[row].changeInstrument(row);
+}
+
+function adjustAll(length) {
+    for (let i = 0; i < instruments.length; ++i) {
+        instruments[i].adjust(length);
+    }
+}
 
 function display() {
     let html = "";
     for (let i = 0; i < instruments.length; ++i) {
-        html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select\"><option>Instrument</option><option>Piano</option><option>Guitar</option><option>Xylophone</option><option>Violin</option></select></td>";
+        html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\"><option value=\"Piano\">Piano</option><option value=\"Xylophone\">Xylophone</option><option value=\"Violin\">Violin</option></select></td>";
         html += instruments[i].display(i);
     }
     html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
     let instrumentTable = document.getElementById("instruments");
     instrumentTable.innerHTML = html;
+}
+
+async function playInstrument(instrument, beatsToTime) {
+    for (let j = 0; j < instruments[instrument].getNotes().length; ++j) {
+        await playNote(instruments[instrument].getInstrument(), instruments[instrument].getNotes()[j].getPitch(), (instruments[instrument].getNotes()[j].getLength() * beatsToTime));
+    }
+}
+
+function play() {
+    const beatsToTime = (60000 / document.getElementById('bpm').value);
+    const playPromises = new Array();
+    for (let i = 0; i < instruments.length; ++i) {
+        playPromises.push(new Promise((resolve) => {
+            playInstrument(i, beatsToTime);
+            resolve(true);
+        }))
+    }
+    Promise.all(playPromises);
+}
+
+function delay(time) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(true);
+        }, time);
+    });
 }
 
 var start;
