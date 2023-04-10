@@ -2,6 +2,10 @@ function toProfile() {
     window.location.href = "profile.html";
 }
 
+function toHome() {
+    window.location.href = "menu.html";
+}
+
 class Song {
     constructor(title, url) {
         this.title = title;
