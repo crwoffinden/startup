@@ -20,6 +20,10 @@ function toUpload() {
     window.location.href = "upload.html";
 }
 
+function save() {
+
+}
+
 function addInstrument() {
     instruments.push(new MusicNotes('Piano'));
     display();
