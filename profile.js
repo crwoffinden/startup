@@ -62,7 +62,7 @@ function loadMessages() {
         text.appendChild(noMessages);
     }
     let post = document.createElement('button');
-    post.onclick = postMessage(post);
+    post.onclick = postMessage;
     post.innerText = "Post Message";
     text.appendChild(post);
 }
