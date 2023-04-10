@@ -9,17 +9,17 @@ function edit(icon) {
     let bio = document.getElementById('bio');
     let nameTxt = name.innerText;
     let bioTxt = bio.innerText;
-    name.innerHTML = `<input type=\"text\" id=\"name\" value=\"${nameTxt}\"></input>`;
-    bio.innerHTML = `<input type=\"text\"id=\"bio\" value=\"${bioTxt}\"></input>`;
+    name.innerHTML = `<input type=\"text\" id=\"nameInput\" value=\"${nameTxt}\"></input>`;
+    bio.innerHTML = `<input type=\"text\"id=\"bioInput\" value=\"${bioTxt}\"></input>`;
     icon.innerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
 }
 
 function save(icon) {
     let name = document.getElementById('name');
     let bio = document.getElementById('bio');
-    let nameTxt = name.ariaValueMax;
-    let bioTxt = bio.ariaValueMax;
-    name.innerHTML = `<p id="name">${nameTxt}</p>`;
-    bio.innerHTML = `<p id="bio">${bioTxt}</p>`;
+    let nameTxt = document.getElementById('nameInput').value;
+    let bioTxt = document.getElementById('bioInput').value;
+    name.innerHTML = `${nameTxt}`;
+    bio.innerHTML = `${bioTxt}`;
     document.removeChild(icon);
 }
