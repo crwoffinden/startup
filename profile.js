@@ -28,7 +28,7 @@ function save(icon) {
     icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
 }
 
-function postMessage(post) {
+function postMessage() {
     window.location.href = "message.html";
 }
 
@@ -51,7 +51,7 @@ function loadMessages() {
         if (messages.length > 3) {
             let seeAll = document.createElement("span");
             seeAll.innerText = "See All";
-            seeAll.onclick = loadAllMessages();
+            seeAll.onclick = loadAllMessages;
             text.appendChild(seeAll);
         }
         
@@ -84,7 +84,7 @@ function loadAllMessages() {
         text.appendChild(currDate);
     }
     let post = document.createElement('button');
-    post.onclick = postMessage();
+    post.onclick = postMessage;
     post.innerText = "Post Message";
     text.appendChild(post);
 }
