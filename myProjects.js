@@ -24,8 +24,8 @@ function loadSongs() {
         description = document.createElement('span');
         description.className = "songDescription";
         description.innerText = finishedSongs[i].description;
-        song.appendChild(description);
         finishedFolder.appendChild(song);
+        song.appendChild(description);
     }
     
     let unfinishedSongs = [];
