@@ -51,7 +51,7 @@ function loadMessages() {
         if (messages.length > 3) {
             let seeAll = document.createElement("span");
             seeAll.innerText = "See All";
-            seeAll.addEventListener("click", loadAllMessages());
+            seeAll.onclick = loadAllMessages();
             text.appendChild(seeAll);
         }
         
@@ -62,7 +62,7 @@ function loadMessages() {
         text.appendChild(noMessages);
     }
     let post = document.createElement('button');
-    post.addEventListener("click", postMessage());
+    post.onclick = postMessage();
     post.innerText = "Post Message";
     text.appendChild(post);
 }
@@ -84,7 +84,7 @@ function loadAllMessages() {
         text.appendChild(currDate);
     }
     let post = document.createElement('button');
-    post.addEventListener("click", postMessage());
+    post.onclick = postMessage();
     post.innerText = "Post Message";
     text.appendChild(post);
 }
