@@ -84,7 +84,7 @@ function loadAllMessages() {
         text.appendChild(currDate);
     }
     let post = document.createElement('button');
-    post.onclick = ("postMessage()");
+    post.addEventListener("click", "postMessage()");
     post.innerText = "Post Message";
     text.appendChild(post);
 }
