@@ -4,7 +4,7 @@ function upload() {
     const newSong = {title: title, description: description};
     let finishedSongs = [];
     let finishedSongsText = localStorage.getItem('finishedSongs');
-    finishedSongs = JSON.parse(finishedSongsText);
+    if (finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
     finishedSongs.unshift(newSong);
 
     localStorage.setItem("finishedSongs", JSON.stringify(finishedSongs));
