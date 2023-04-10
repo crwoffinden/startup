@@ -59,7 +59,7 @@ function loadMessages() {
     else {
         let noMessages = document.createElement('p');
         noMessages.innerText = "No Messages Yet";
-        Text.appendChild(noMessages);
+        text.appendChild(noMessages);
     }
     let post = document.createElement('button');
     post.onclick = ("postMessage()");
