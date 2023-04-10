@@ -28,7 +28,7 @@ function save(icon) {
     icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
 }
 
-function postMessage() {
+function postMessage(post) {
     window.location.href = "message.html";
 }
 
@@ -62,7 +62,7 @@ function loadMessages() {
         text.appendChild(noMessages);
     }
     let post = document.createElement('button');
-    post.addEventListener("click", postMessage());
+    post.onclick = postMessage(post);
     post.innerText = "Post Message";
     text.appendChild(post);
 }
