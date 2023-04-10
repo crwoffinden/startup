@@ -10,3 +10,10 @@ function upload() {
     localStorage.setItem("finishedSongs", JSON.stringify(finishedSongs));
     window.location.href = "myProjects.html";
 }
+
+function startScreen() {
+    let title = localStorage.getItem('title');
+    document.getElementById('song-title').value = title;
+}
+
+startScreen();
