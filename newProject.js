@@ -16,7 +16,7 @@ function toProfile() {
 
 function toUpload() {
     localStorage.setItem("url", window.location.href);
-    localStorage.setItem('title', JSON.stringify(getElementById('songTitle').value));
+    localStorage.setItem('title', JSON.stringify(document.getElementById('songTitle').value));
     window.location.href = "upload.html";
 }
 
