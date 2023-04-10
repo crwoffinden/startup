@@ -38,7 +38,7 @@ function loadMessages() {
     if (messagesText) messages = JSON.parse(messagesText);
     let text = document.getElementById('messages');
     if (messages.length > 0) {
-        for (let i = 0; (i < messages.length) || (i < 3); ++i) {
+        for (let i = 0; (i < messages.length) && (i < 3); ++i) {
             let currMessage = document.createElement('p');
             currMessage.id = "message";
             currMessage.innerText = messages[i].message;
