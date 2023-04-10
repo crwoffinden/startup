@@ -29,7 +29,7 @@ function save(icon) {
 }
 
 function postMessage() {
-    window.location.href = "message.html"
+    window.location.href = "message.html";
 }
 
 function loadMessages() {
