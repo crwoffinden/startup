@@ -1,3 +1,7 @@
+function toHome() {
+    window.location.href = "menu.html";
+}
+
 function select(chosen) {
     const old = document.getElementById("icon-current");
     if (old !== chosen) {
