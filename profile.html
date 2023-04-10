@@ -18,7 +18,7 @@
     <body class="main-theme">
         <header class="main-bar">
             <menu class="options">
-                <i class="bi bi-pencil"></i>
+                <i class="bi bi-pencil" onclick="edit(this)"></i>
                 <i class="bi bi-search"></i>
                 <i class="bi bi-heart" id="favorite" onclick="fill()"></i>
                 <i class="bi bi-plus-lg"></i>
@@ -26,8 +26,10 @@
         </header>
         <main class="page">
             <!--<img src="" alt=""></img> Insert profile pic here-->
-            <p class="name">Firstname Lastname</p>
-            <p class="bio">This is where you tell us about yourself.</p>
+            <section id = "editable">
+                <p class="name">Firstname Lastname</p>
+                <p class="bio">This is where you tell us about yourself.</p>
+            </section>
             <ul>Songs
                 <li>Song 1</li>
                 <li>Song 2</li>
