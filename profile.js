@@ -11,7 +11,7 @@ function edit(icon) {
     let bioTxt = bio.innerText;
     name.innerHTML = `<input type=\"text\" id=\"nameInput\" value=\"${nameTxt}\"></input>`;
     bio.innerHTML = `<input type=\"text\"id=\"bioInput\" value=\"${bioTxt}\"></input>`;
-    icon.innerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
+    icon.outerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
 }
 
 function save(icon) {
@@ -21,5 +21,5 @@ function save(icon) {
     let bioTxt = document.getElementById('bioInput').value;
     name.innerHTML = `${nameTxt}`;
     bio.innerHTML = `${bioTxt}`;
-    document.getElementById('options').removeChild(icon);
+    icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
 }
