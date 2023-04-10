@@ -21,5 +21,5 @@ function save(icon) {
     let bioTxt = document.getElementById('bioInput').value;
     name.innerHTML = `${nameTxt}`;
     bio.innerHTML = `${bioTxt}`;
-    document.removeChild(icon);
+    document.getElementById('options').removeChild(icon);
 }
