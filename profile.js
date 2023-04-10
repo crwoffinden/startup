@@ -5,9 +5,11 @@ function fill() {
 }
 
 function edit(icon) {
-    let details = document.getElementById('editable');
-    let name = details.getElementsByTagName('p')[0];
-    let bio = details.getElementsByTagName('p')[1];
-    details.innerHTML = "<span><input type=\"text\" class=\"name\" value=\"${name}\"></input></span><span><input type=\"text\"class=\"bio\" value=\"This is where you tell us about yourself.\"></input></span>";
+    let name = document.getElementById('name');
+    let bio = document.getElementById('bio');
+    let nameTxt = name.innerText;
+    let bioTxt = bio.innerText;
+    name.innerHTML = `<input type=\"text\" class=\"name\" value=\"${name}\"></input>`;
+    bio.innerHTML = `<input type=\"text\"class=\"bio\" value=\"This is where you tell us about yourself.\"></input>`;
     icon.innerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
 }
