@@ -37,6 +37,7 @@ function loadSongs() {
         const song = document.createElement('li');
         song.onclick = function goToSong() {
             localStorage.setItem('selectedSong', JSON.stringify(unfinishedSongs[i]));
+            unfinishedSongs.unshift(unfinishedSongs[i]);
             window.location.href = "newProject.html";
         };
         song.innerText = unfinishedSongs[i].title;

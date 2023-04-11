@@ -34,7 +34,7 @@ function save() {
     let unfinishedSongs = [];
     unfinishedSongsText = localStorage.getItem('unfinishedSongs');
     if (unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
-    unfinishedSongs.unshift(newSong);
+    unfinishedSongs[0] = newSong;
     localStorage.setItem('unfinishedSongs', JSON.stringify(unfinishedSongs));
 }
 
