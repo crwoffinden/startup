@@ -38,7 +38,7 @@ function loadSongs() {
     let songs = [];
     const songsText = localStorage.getItem('finishedSongs');
     if (songsText) songs = JSON.parse(songsText);
-    let text = document.getElementById(songs);
+    let text = document.getElementById('songs');
     if (songs.length > 0) {
         for (let i = 0; (i < songs.length) && (i < 5); ++i) {
             const newSong = document.createElement('li');
