@@ -31,7 +31,7 @@ function save() {
         music[i] = (JSON.stringify(music[i]));
     }
     const date = new Date();
-    const newSong = {title: document.getElementById('songTitle').value, date: date, bpm: document.getElementById('bpm').value, music: JSON.stringify(music)};
+    const newSong = {title: document.getElementById('songTitle').value, date: date, bpm: document.getElementById('bpm').value, music: music};
     let unfinishedSongs = [];
     unfinishedSongsText = localStorage.getItem('unfinishedSongs');
     if (unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
