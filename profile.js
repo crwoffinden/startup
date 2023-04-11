@@ -32,6 +32,61 @@ function postMessage() {
     window.location.href = "message.html";
 }
 
+function loadSongs() {
+    let songs = [];
+    const songsText = localStorage.getItem('finishedSongs');
+    if (songsText) songs = JSON.parse(songsText);
+    let text = document.getElementById(songs);
+    if (songs.length > 0) {
+        for (let i = 0; (i < songs.length) && (i < 5); ++i) {
+            const newSong = document.createElement('li');
+            newSong.innerText = songs[i].title;
+            const description = document.createElement('span');
+            description.id = "description";
+            description.innerText = songs[i].description;
+            const date = document.createElement('span');
+            date.id = "date";
+            date.innerText = songs[i].date;
+            text.appendChild(newSong);
+            newSong.appendChild(description);
+            newSong.appendChild(date);
+        }
+        if (songs.length > 5) {
+            let seeAll = document.createElement("span");
+            seeAll.innerText = "See All";
+            seeAll.onclick = loadAllSongs;
+            text.appendChild(seeAll);
+        }
+    } else {
+        let noSongs = document.createElement('p');
+        noSongs.innerText = "No Songs Yet";
+        text.appendChild(noSongs);
+    }
+}
+
+function loadAllSongs() {
+    let songs = [];
+    const songsText = localStorage.getItem('finishedSongs');
+    if (songsText) songs = JSON.parse(songsText);
+    let text = document.getElementById(songs);
+    text.innerHTML = "Songs";
+    if (songs.length > 0) {
+        for (let i = 0; (i < songs.length) && (i < 5); ++i) {
+            const newSong = document.createElement('li');
+            newSong.innerText = songs[i].title;
+            const description = document.createElement('span');
+            description.id = "description";
+            description.innerText = songs[i].description;
+            const date = document.createElement('span');
+            date.id = "date";
+            date.innerText = songs[i].date;
+            text.appendChild(newSong);
+            newSong.appendChild(description);
+            newSong.appendChild(date);
+        }
+    }
+}
+
 function loadMessages() {
     let messages = [];
     const messagesText = localStorage.getItem('messages');
