@@ -230,7 +230,7 @@ function delay(time) {
 
 function load() {
     mySongText = localStorage.getItem('selectedSong');
-    if (mySongText !== "") {
+    if (mySongText) {
         const mySong = JSON.parse(mySongText);
         musicText = mySong.music;
         instruments = JSON.parse(musicText);
