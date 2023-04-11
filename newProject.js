@@ -16,6 +16,9 @@ function toProfile() {
 
 function toUpload() {
     localStorage.setItem('title', document.getElementById('songTitle').value);
+    for (let i = 0; i < instruments.length; ++i) {
+        instruments[i] = JSON.stringify(instruments[i]);
+    }
     localStorage.setItem('music', JSON.stringify(instruments));
     window.location.href = "upload.html";
 }
@@ -100,9 +103,9 @@ function split(position, oldNotes, newNote, fullLength) {
 }
 
 class MusicNotes {
-    notes = [new Note(null, 5)];
-    constructor(instrument) {
-        this.instrument = instrument;        
+    constructor(instrument, notes = [new Note(null, 5)]) {
+        this.instrument = instrument;
+        this.notes = notes;
     }
 
     changeInstrument(row) {
@@ -160,7 +163,7 @@ class MusicNotes {
     displayRow(row) {
         let html = "<option value=\"Piano\" ";
         if (this.instrument === "Piano") html += "selected";
-        html += ">Piano</option><option value=\"Xylophone\" "
+        html += ">Piano</option><option value=\"Xylophone\" ";
         if (this.instrument === "Xylophone") html += "selected"; 
         html += ">Xylophone</option><option value=\"Violin\" ";
         if (this.instrument === "Violin") html += "selected"
@@ -195,7 +198,28 @@ function display() {
     let html = "";
     for (let i = 0; i < instruments.length; ++i) {
         html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\">";
-        html += instruments[i].displayRow(i);
+        /*html += function displayRow() {
+            html += "<option value=\"Piano\" ";
+            if (instruments[i].getInstrument() === "Piano") html += "selected";
+            html += ">Piano</option><option value=\"Xylophone\" "
+            if (instruments[i].getInstrument() === "Xylophone") html += "selected"; 
+            html += ">Xylophone</option><option value=\"Violin\" ";
+            if (instruments[i].getInstrument() === "Violin") html += "selected";
+            html += ">Violin</option></select></td><td><div class=\"instrument-visual\">";
+            let k = 0;
+            for (let x = 0; x < instruments[i].getNotes().length; ++x) {    
+                for (let y = 0; y < instruments[i].getNotes()[x].getLength(); y += 0.25) {
+                    html += "<div class=\"block";
+                    if (instruments[i].getNotes[x].getPitch() != null) html += " " + this.notes[x].getPitch();
+                    html += "\" onclick=\"addNote(" + i  + ", " + k + ")\"></div>";
+                    k += 0.25;
+                }
+            }
+            html += "</div></td></tr>";
+            return html;
+        }*/
+        const currInstrument = instruments[i];
+        html += currInstrument.displayRow(i);
     }
     html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
     let instrumentTable = document.getElementById("instruments");
@@ -232,7 +256,14 @@ function load() {
     mySongText = localStorage.getItem('selectedSong');
     if (mySongText !== "undefined") {
         const mySong = JSON.parse(mySongText);
-        instruments = mySong.music;
+        for (let i = 0; i < mySong.music.length; ++i) {
+            const newNotes = [];
+            for (let j = 0; j < mySong.music[i].notes.length; ++j) {
+                newNotes.push(new Note(mySong.music[i].notes[j].pitch, Number(mySong.music[i].notes[j].length)))
+            }
+            const currInstrument = new MusicNotes(mySong.music[i].instrument, newNotes);
+            instruments.push(currInstrument);
+        }
         document.getElementById('songTitle').value = mySong.title;
     }
     else instruments = [new MusicNotes('Piano')];
