@@ -11,8 +11,8 @@ function fill() {
 function edit(icon) {
     let name = document.getElementById('name');
     let bio = document.getElementById('bio');
-    let nameTxt = name.innerText;
-    let bioTxt = bio.innerText;
+    let nameTxt = localStorage.getItem('name');
+    let bioTxt = localStorage.getItem('bio');
     name.innerHTML = `<input type=\"text\" id=\"nameInput\" value=\"${nameTxt}\"></input>`;
     bio.innerHTML = `<input type=\"text\"id=\"bioInput\" value=\"${bioTxt}\"></input>`;
     icon.outerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
@@ -23,6 +23,8 @@ function save(icon) {
     let bio = document.getElementById('bio');
     let nameTxt = document.getElementById('nameInput').value;
     let bioTxt = document.getElementById('bioInput').value;
+    localStorage.setItem('name', nameTxt);
+    localStorage.setItem('bio', bioTxt);
     name.innerHTML = `${nameTxt}`;
     bio.innerHTML = `${bioTxt}`;
     icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
@@ -68,7 +70,7 @@ function loadAllSongs() {
     let songs = [];
     const songsText = localStorage.getItem('finishedSongs');
     if (songsText) songs = JSON.parse(songsText);
-    let text = document.getElementById(songs);
+    let text = document.getElementById('songs');
     text.innerHTML = "Songs";
     if (songs.length > 0) {
         for (let i = 0; (i < songs.length) && (i < 5); ++i) {
