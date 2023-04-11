@@ -15,7 +15,7 @@ function toProfile() {
 }
 
 function toUpload() {
-    localStorage.setItem('title', JSON.stringify(document.getElementById('songTitle').value));
+    localStorage.setItem('title', document.getElementById('songTitle').value);
     localStorage.setItem('music', JSON.stringify(instruments));
     window.location.href = "upload.html";
 }
@@ -232,7 +232,8 @@ function load() {
     mySongText = localStorage.getItem('selectedSong');
     if (mySongText) {
         const mySong = JSON.parse(mySongText);
-        instruments = mySong.music;
+        musicText = mySong.music;
+        instruments = JSON.parse(musicText);
         document.getElementById('songTitle').value = mySong.title;
     }
     else instruments = [new MusicNotes('Piano')];
