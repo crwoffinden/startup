@@ -232,8 +232,7 @@ function load() {
     mySongText = localStorage.getItem('selectedSong');
     if (mySongText !== "undefined") {
         const mySong = JSON.parse(mySongText);
-        musicText = mySong.music;
-        instruments = JSON.parse(musicText);
+        instruments = mySong.music;
         document.getElementById('songTitle').value = mySong.title;
     }
     else instruments = [new MusicNotes('Piano')];
