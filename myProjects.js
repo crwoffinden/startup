@@ -29,6 +29,7 @@ function loadSongs() {
         song.appendChild(date);
     }
     
+    const unfinishedFolder = document.getElementById('unfinished');
     let unfinishedSongs = [];
     const unfinishedSongsText = localStorage.getItem('unfinishedSongs');
     if(unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
