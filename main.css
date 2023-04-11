@@ -280,3 +280,8 @@
 .page {
     margin-top: 8vw;
 }
+
+#date {
+    font-size: 10px;
+    color: gray;
+}

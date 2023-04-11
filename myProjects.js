@@ -21,11 +21,15 @@ function loadSongs() {
     for (let i = 0; i < finishedSongs.length; ++i) {
         const song = document.createElement('li');
         song.innerText = finishedSongs[i].title;
-        description = document.createElement('span');
+        const description = document.createElement('span');
         description.className = "songDescription";
         description.innerText = finishedSongs[i].description;
+        const date = document.createElement('span');
+        date.id = "date";
+        date = finishedSongs[i].date;
         finishedFolder.appendChild(song);
         song.appendChild(description);
+        song.appendChild(date);
     }
     
     let unfinishedSongs = [];
