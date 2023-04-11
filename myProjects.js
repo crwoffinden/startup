@@ -34,11 +34,11 @@ function loadSongs() {
     if(unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
     for (let i = 0; i < unfinishedSongs.length; ++i) {
         const song = document.createElement('li');
+        song.onclick = function goToSong() {
+            localStorage.setItem('selectedSong', JSON.stringify(unfinishedSongs[i]));
+            window.location.href = "newProject.html";
+        };
         song.innerText = unfinishedSongs[i].title;
-        description = document.createElement('span');
-        description.className = "songDescription";
-        description.innerText = unfinishedSongs[i].description;
-        song.appendChild(description);
         unfinishedFolder.appendChild(song);
     }
 }

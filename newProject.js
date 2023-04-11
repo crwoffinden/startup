@@ -25,7 +25,16 @@ function toUpload() {
 }
 
 function save() {
-
+    for (let i = 0; i < instruments.length; ++i) {
+        instruments[i] = JSON.stringify(instruments[i]);
+    }
+    const date = new Date();
+    const newSong = {title: document.getElementById('songTitle').value, date: date, bpm: document.getElementById('bpm').value, music: JSON.stringify(instruments)};
+    let unfinishedSongs = [];
+    unfinishedSongsText = localStorage.getItem('unfinishedSongs');
+    if (unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
+    unfinishedSongs.unshift(newSong);
+    localStorage.setItem('unfinishedSongs', JSON.stringify(unfinishedSongs));
 }
 
 function addInstrument() {
