@@ -157,7 +157,7 @@ class MusicNotes {
         display();
     }
 
-    display(row) {
+    displayRow(row) {
         let html = "<option value=\"Piano\" ";
         if (this.instrument === "Piano") html += "selected";
         html += ">Piano</option><option value=\"Xylophone\" "
@@ -195,7 +195,7 @@ function display() {
     let html = "";
     for (let i = 0; i < instruments.length; ++i) {
         html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\">";
-        html += instruments[i].display(i);
+        html += instruments[i].displayRow(i);
     }
     html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
     let instrumentTable = document.getElementById("instruments");
