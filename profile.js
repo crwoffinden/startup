@@ -73,7 +73,7 @@ function loadAllSongs() {
     let text = document.getElementById('songs');
     text.innerHTML = "Songs";
     if (songs.length > 0) {
-        for (let i = 0; (i < songs.length) && (i < 5); ++i) {
+        for (let i = 0; i < songs.length; ++i) {
             const newSong = document.createElement('li');
             newSong.innerText = songs[i].title;
             const description = document.createElement('span');
