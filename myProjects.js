@@ -26,7 +26,7 @@ function loadSongs() {
         description.innerText = finishedSongs[i].description;
         const date = document.createElement('span');
         date.id = "date";
-        date = finishedSongs[i].date;
+        date.innerText = finishedSongs[i].date;
         finishedFolder.appendChild(song);
         song.appendChild(description);
         song.appendChild(date);
