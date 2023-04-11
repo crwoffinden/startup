@@ -179,7 +179,7 @@ class MusicNotes {
     }
 }
 
-const instruments = [];
+let instruments = [];
 
 function changeInstrument(row) {
     instruments[row].changeInstrument(row);
