@@ -236,6 +236,7 @@ function load() {
         document.getElementById('songTitle').value = mySong.title;
     }
     else instruments = [new MusicNotes('Piano')];
+    display();
 }
 
 load();
