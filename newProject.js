@@ -25,8 +25,9 @@ function toUpload() {
 }
 
 function save() {
-    const music = instruments;
-    for (let i = 0; i < music.length; ++i) {
+    const music = [];
+    for (let i = 0; i < instruments.length; ++i) {
+        music.push(instruments[i]);
         music[i] = (JSON.stringify(music[i]));
     }
     const date = new Date();
