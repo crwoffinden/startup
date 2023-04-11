@@ -20,6 +20,7 @@ function toUpload() {
         instruments[i] = JSON.stringify(instruments[i]);
     }
     localStorage.setItem('music', JSON.stringify(instruments));
+    localStorage.setItem('bpm', document.getElementById('bpm'));
     window.location.href = "upload.html";
 }
 
@@ -198,28 +199,7 @@ function display() {
     let html = "";
     for (let i = 0; i < instruments.length; ++i) {
         html += "<tr class=\"instrument\"><td><select name=\"instrumentSelect\" id=\"select" + i + "\" onchange=\"changeInstrument(" + i + ")\">";
-        /*html += function displayRow() {
-            html += "<option value=\"Piano\" ";
-            if (instruments[i].getInstrument() === "Piano") html += "selected";
-            html += ">Piano</option><option value=\"Xylophone\" "
-            if (instruments[i].getInstrument() === "Xylophone") html += "selected"; 
-            html += ">Xylophone</option><option value=\"Violin\" ";
-            if (instruments[i].getInstrument() === "Violin") html += "selected";
-            html += ">Violin</option></select></td><td><div class=\"instrument-visual\">";
-            let k = 0;
-            for (let x = 0; x < instruments[i].getNotes().length; ++x) {    
-                for (let y = 0; y < instruments[i].getNotes()[x].getLength(); y += 0.25) {
-                    html += "<div class=\"block";
-                    if (instruments[i].getNotes[x].getPitch() != null) html += " " + this.notes[x].getPitch();
-                    html += "\" onclick=\"addNote(" + i  + ", " + k + ")\"></div>";
-                    k += 0.25;
-                }
-            }
-            html += "</div></td></tr>";
-            return html;
-        }*/
-        const currInstrument = instruments[i];
-        html += currInstrument.displayRow(i);
+        html += instruments[i].displayRow(i);
     }
     html += "<tr class=\"instrument\"><td>Add Instrument<i class=\"bi bi-plus-lg\" onclick=\"addInstrument()\"></i></td></tr>";
     let instrumentTable = document.getElementById("instruments");
@@ -265,6 +245,7 @@ function load() {
             instruments.push(currInstrument);
         }
         document.getElementById('songTitle').value = mySong.title;
+        document.getElementById('bpm').value = mySong.bpm;
     }
     else instruments = [new MusicNotes('Piano')];
     display();
