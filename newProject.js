@@ -20,7 +20,7 @@ function toUpload() {
         instruments[i] = JSON.stringify(instruments[i]);
     }
     localStorage.setItem('music', JSON.stringify(instruments));
-    localStorage.setItem('bpm', document.getElementById('bpm'));
+    localStorage.setItem('bpm', document.getElementById('bpm').value);
     window.location.href = "upload.html";
 }
 
