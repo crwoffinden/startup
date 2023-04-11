@@ -6,11 +6,6 @@ function toHome() {
     window.location.href = "menu.html";
 }
 
-function goToSong(selectedSong) {
-    localStorage.setItem('selectedSong', JSON.stringify(selectedSong));
-    window.location.href = "newProject.html";
-}
-
 function loadSongs() {
     const finishedFolder = document.getElementById("finished");
     let finishedSongs = [];
@@ -18,7 +13,10 @@ function loadSongs() {
     if(finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
     for (let i = 0; i < finishedSongs.length; ++i) {
         const song = document.createElement('li');
-        song.onclick = goToSong(finishedSongs[i]);
+        song.onclick = function goToSong() {
+            localStorage.setItem('selectedSong', JSON.stringify(finishedSongs[i]));
+            window.location.href = "newProject.html";
+        };
         song.innerText = finishedSongs[i].title;
         const description = document.createElement('span');
         description.className = "songDescription";
