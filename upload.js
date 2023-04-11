@@ -1,6 +1,6 @@
 function upload() {
-    const title = document.getElementById("song-title");
-    const description = document.getElementById('song-description');
+    const title = document.getElementById("song-title").value;
+    const description = document.getElementById('song-description').value;
     const date = new Date();
     const newSong = {title: title, description: description, date: date};
     let finishedSongs = [];
