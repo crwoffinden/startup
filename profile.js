@@ -42,9 +42,13 @@ function loadSongs() {
     if (songs.length > 0) {
         for (let i = 0; (i < songs.length) && (i < 5); ++i) {
             const newSong = document.createElement('li');
+            newSong.onclick = function goToSong() {
+                localStorage.setItem('selectedSong', JSON.stringify(finishedSongs[i]));
+                window.location.href = "newProject.html";
+            };
             newSong.innerText = songs[i].title;
             const description = document.createElement('span');
-            description.id = "description";
+            description.className = "songDescription";
             description.innerText = songs[i].description;
             const date = document.createElement('span');
             date.id = "date";
@@ -75,9 +79,13 @@ function loadAllSongs() {
     if (songs.length > 0) {
         for (let i = 0; i < songs.length; ++i) {
             const newSong = document.createElement('li');
+            newSong.onclick = function goToSong() {
+                localStorage.setItem('selectedSong', JSON.stringify(finishedSongs[i]));
+                window.location.href = "newProject.html";
+            };
             newSong.innerText = songs[i].title;
             const description = document.createElement('span');
-            description.id = "description";
+            description.className = "songDescription";
             description.innerText = songs[i].description;
             const date = document.createElement('span');
             date.id = "date";
