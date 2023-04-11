@@ -1,7 +1,8 @@
 function upload() {
     const title = document.getElementById("song-title");
     const description = document.getElementById('song-description');
-    const newSong = {title: title, description: description};
+    const date = new Date();
+    const newSong = {title: title, description: description, date: date};
     let finishedSongs = [];
     let finishedSongsText = localStorage.getItem('finishedSongs');
     if (finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
