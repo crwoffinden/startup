@@ -144,4 +144,6 @@ function loadAllMessages() {
     text.appendChild(post);
 }
 
+loadSongs();
+
 loadMessages();

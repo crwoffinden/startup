@@ -281,6 +281,10 @@
     margin-top: 8vw;
 }
 
+#description {
+    margin-left: 20vw;
+}
+
 #date {
     font-size: 10px;
     color: gray;
