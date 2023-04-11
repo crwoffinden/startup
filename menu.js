@@ -3,6 +3,7 @@ function toProfile() {
 }
 
 function newProject() {
+    localStorage.setItem("selectedSong", undefined)
     window.location.href = "newProject.html";
 }
 
