@@ -15,8 +15,8 @@ function toProfile() {
 }
 
 function toUpload() {
-    localStorage.setItem("url", window.location.href);
     localStorage.setItem('title', JSON.stringify(document.getElementById('songTitle').value));
+    localStorage.setItem('music', JSON.stringify(instruments));
     window.location.href = "upload.html";
 }
 
@@ -179,7 +179,7 @@ class MusicNotes {
     }
 }
 
-const instruments = [new MusicNotes('Piano')];
+const instruments = [];
 
 function changeInstrument(row) {
     instruments[row].changeInstrument(row);
@@ -228,7 +228,18 @@ function delay(time) {
     });
 }
 
+function load() {
+    mySongText = localStorage.getItem('selectedSong');
+    if (mySongText) {
+        const mySong = JSON.parse(mySongText);
+        instruments = mySong.music;
+        document.getElementById('songTitle').value = mySong.title;
+    }
+    else instruments = [new MusicNotes('Piano')];
+}
+
+load();
+
 var start;
 
 var end;
-
