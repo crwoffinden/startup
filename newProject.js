@@ -236,12 +236,13 @@ function load() {
     mySongText = localStorage.getItem('selectedSong');
     if (mySongText !== "undefined") {
         const mySong = JSON.parse(mySongText);
-        for (let i = 0; i < mySong.music.length; ++i) {
+        const music = JSON.parse(mySong.music);
+        for (let i = 0; i < music.length; ++i) {
             const newNotes = [];
-            for (let j = 0; j < mySong.music[i].notes.length; ++j) {
-                newNotes.push(new Note(mySong.music[i].notes[j].pitch, Number(mySong.music[i].notes[j].length)))
+            for (let j = 0; j < music[i].notes.length; ++j) {
+                newNotes.push(new Note(music[i].notes[j].pitch, Number(music[i].notes[j].length)))
             }
-            const currInstrument = new MusicNotes(mySong.music[i].instrument, newNotes);
+            const currInstrument = new MusicNotes(music[i].instrument, newNotes);
             instruments.push(currInstrument);
         }
         document.getElementById('songTitle').value = mySong.title;
