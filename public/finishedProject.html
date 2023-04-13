@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="main.css" />
+        <link 
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF"
+            crossorigin="anonymous"
+        />
+        <link 
+            rel="stylesheet" 
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        />
+    </head>
+    <body class="main-theme">
+        <header class="main-bar">
+            <h1 class="title" onclick="toHome()">NoteLab</h1>
+            <menu class="options">
+                <i class="bi bi-play-fill" onclick="play()"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-person-circle" onclick="toProfile()"></i>
+            </menu>
+        </header>
+        <main>
+            <h1>
+                <input type="text" id="songTitle" placeholder="Untitled Song"></input>
+            </h1>
+            <section class="music-visual">
+                <table id="instruments">
+                </table>
+            </section>
+        </main>
+        <script src="finishedProject.js"></script>
+    </body>
+</html>

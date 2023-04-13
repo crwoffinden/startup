@@ -1,0 +1,12 @@
+{
+    "configurations": [
+
+
+        {
+            "type": "chrome",
+            "name": "http://app.get('/*', (req, res) => {  res.send({ url: req.originalUrl });});",
+            "request": "launch",
+            "url": "http://localhost:3000"
+        }
+    ]
+}

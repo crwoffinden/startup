@@ -44,7 +44,7 @@ function loadSongs() {
             const newSong = document.createElement('li');
             newSong.onclick = function goToSong() {
                 localStorage.setItem('selectedSong', JSON.stringify(songs[i]));
-                window.location.href = "newProject.html";
+                window.location.href = "finishedProject.html";
             };
             newSong.innerText = songs[i].title;
             const description = document.createElement('span');
@@ -81,7 +81,7 @@ function loadAllSongs() {
             const newSong = document.createElement('li');
             newSong.onclick = function goToSong() {
                 localStorage.setItem('selectedSong', JSON.stringify(songs[i]));
-                window.location.href = "newProject.html";
+                window.location.href = "finishedProject.html";
             };
             newSong.innerText = songs[i].title;
             const description = document.createElement('span');
