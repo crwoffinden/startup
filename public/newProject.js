@@ -11,6 +11,7 @@ function select(chosen) {
 }
 
 function toProfile() {
+    localStorage.setItem('differentUser', false);
     window.location.href = "profile.html";
 }
 

@@ -21,12 +21,13 @@
             <menu class="options">
                 <i class="bi bi-play-fill" onclick="play()"></i>
                 <i class="bi bi-search"></i>
-                <i class="bi bi-person-circle" onclick="toProfile()"></i>
+                <i class="bi bi-person-circle" onclick="toProfile()"><!--the actual user-->></i>
             </menu>
         </header>
         <main>
             <h1>
                 <input type="text" id="songTitle" placeholder="Untitled Song"></input>
+                <span id="creator" onclick="toProfile(true)"></span>
             </h1>
             <section class="music-visual">
                 <table id="instruments">

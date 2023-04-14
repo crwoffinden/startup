@@ -1,8 +1,16 @@
+//const { addListen } = require("../database");
+
 function toHome() {
     window.location.href = "menu.html";
 }
 
-function toProfile() {
+function toProfile(differentUser = false) {
+    if (differentUser) {
+        localStorage.setItem('chosenUser', user);
+        if (localStorage.getItem('chosenUser') === localStorage.getItem('userName')) {
+            localStorage.setItem('differentUser', false);
+        } else localStorage.setItem('differentUser', true);
+    } else localStorage.setItem('differentUser', false);
     window.location.href = "profile.html";
 }
 
@@ -80,6 +88,7 @@ class MusicNotes {
 let instruments = [];
 var bpm;
 var listens;
+var user;
 
 function display() {
     let html = "";
@@ -107,6 +116,7 @@ function play() {
         }))
     }
     Promise.all(playPromises);
+    addListen //FIXME figure out how to enumerate
     listens += 1;
 }
 
@@ -132,10 +142,16 @@ function load() {
             instruments.push(currInstrument);
         }
         document.getElementById('songTitle').value = mySong.title;
+        const creator = mySong.creator;
+        document.getElementById('creator').innerText = "Created by " + creator;
+
+        
         bpm = mySong.bpm;
         listens = mySong.plays;
+        user = creator;
     }
     else instruments = [new MusicNotes('Piano')];
+    user = localStorage.getItem('userName');
     display();
 }
 

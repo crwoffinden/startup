@@ -1,3 +1,5 @@
+//const { getSongsByUser, getUserMessages } = require("../database");
+
 function toHome() {
     window.location.href = "menu.html";
 }
@@ -8,6 +10,7 @@ function fill() {
     else if (favorite.className === "bi bi-heart-fill") favorite.className = "bi bi-heart";
 }
 
+//FIXME these two functions need to be adjusted based on Database possibilities
 function edit(icon) {
     let name = document.getElementById('name');
     let bio = document.getElementById('bio');
@@ -28,6 +31,7 @@ function save(icon) {
     name.innerHTML = `${nameTxt}`;
     bio.innerHTML = `${bioTxt}`;
     icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
+    //updateProfile
 }
 
 function postMessage() {
@@ -36,6 +40,7 @@ function postMessage() {
 
 function loadSongs() {
     let songs = [];
+    //songs = getSongsByUser//FIXME figure out how to format
     const songsText = localStorage.getItem('finishedSongs');
     if (songsText) songs = JSON.parse(songsText);
     let text = document.getElementById('songs');
@@ -72,6 +77,7 @@ function loadSongs() {
 
 function loadAllSongs() {
     let songs = [];
+    songs = getSongsByUser//FIXME figure out how to format
     const songsText = localStorage.getItem('finishedSongs');
     if (songsText) songs = JSON.parse(songsText);
     let text = document.getElementById('songs');
@@ -97,11 +103,72 @@ function loadAllSongs() {
     }
 }
 
-function loadMessages() {
+function loadFollowing() {
+    const following = [];
+    //getFavorites FIXME figure this out
+    let text = document.getElementById('following');
+    text.innerHTML = "Following";
+    if (following.length > 0) {
+        for (let i = 0; (i < following.length) && (i < 5); ++i) {
+            const newPerson = document.createElement('li');
+            newPerson.onclick = function goToProfile() {
+                localStorage.setItem('chosenUser', following[i].user);
+                localStorage.setItem('differentUser', true);
+                load();
+            };
+            newPerson.innerText = following[i].name;
+            text.appendChild(newPerson);
+        } if (following.length > 5) {
+            let seeAll = document.createElement("span");
+            seeAll.innerText = "See All";
+            seeAll.onclick = loadAllFollowing;
+            text.appendChild(seeAll);
+        }
+    } else {
+        let notFollowing = document.createElement('p');
+        notFollowing.innerText = "Not Following Anyone Yet";
+        text.appendChild(notFollowing);
+    }
+}
+
+function loadAllFollowing() {
+    const following = [];
+    //getFavorites FIXME figure this out
+    let text = document.getElementById('following');
+    text.innerHTML = "Following";
+    if (following.length > 0) {
+        for (let i = 0; (i < following.length) && (i < 5); ++i) {
+            const newPerson = document.createElement('li');
+            newPerson.onclick = function goToProfile() {
+                localStorage.setItem('chosenUser', following[i].user);
+                localStorage.setItem('differentUser', true);
+                load();
+            };
+            newPerson.innerText = following[i].name;
+            text.appendChild(newPerson);
+        }
+    }
+}
+
+async function loadMessages() {
     let messages = [];
-    const messagesText = localStorage.getItem('messages');
-    if (messagesText) messages = JSON.parse(messagesText);
-    let text = document.getElementById('messages');
+    try {
+        console.log("trying");
+        const myUser = {user: user};
+        const response = await fetch('/api/getMessages', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(myUser)
+        });
+        messages = await response.json();
+    } catch {
+        if (user === localStorage.getItem("userName")) {
+            const messagesText = localStorage.getItem('messages');
+            if (messagesText) messages = JSON.parse(messagesText);
+        }
+    }
+
+    let text = document.getElementById('messages');    
     if (messages.length > 0) {
         for (let i = 0; (i < messages.length) && (i < 3); ++i) {
             let currMessage = document.createElement('p');
@@ -132,10 +199,24 @@ function loadMessages() {
     text.appendChild(post);
 }
 
-function loadAllMessages() {
+async function loadAllMessages() {
     let messages = [];
-    const messagesText = localStorage.getItem('messages');
-    if (messagesText) messages = JSON.parse(messagesText);
+    try {
+        console.log("trying");
+        const myUser = {user: user};
+        const response = await fetch('/api/getMessages', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(myUser)
+        });
+        messages = await response.json();
+    } catch{
+        if (user === localStorage.getItem("userName")) {
+            const messagesText = localStorage.getItem('messages');
+            if (messagesText) messages = JSON.parse(messagesText);
+        }
+    }
+    
     let text = document.getElementById('messages');
     text.innerHTML = "Messages";
     for (let i = 0; i < messages.length; ++i) {
@@ -154,6 +235,18 @@ function loadAllMessages() {
     text.appendChild(post);
 }
 
-loadSongs();
+function load() {
+    const differentUser = localStorage.getItem('differentUser')
+    if (differentUser) {
+        user = localStorage.getItem('chosenUser');
+        
+    }
+    else user = localStorage.getItem('userName');
+    loadSongs();
+    loadFollowing();
+    loadMessages();
+}
 
-loadMessages();
+var user;
+
+load();

@@ -1,11 +1,12 @@
 async function upload() {
+    const creator = localStorage.getItem('userName');
     const title = document.getElementById("song-title").value;
     const description = document.getElementById('song-description').value;
     const date = new Date();
     const bpm = localStorage.getItem('bpm');
     const musicText = localStorage.getItem('music');
     const music = JSON.parse(musicText);
-    const newSong = {title: title, description: description, date: date, bpm: bpm, music: music, listens: 0};
+    const newSong = {creator: creator, title: title, description: description, date: date, bpm: bpm, music: music, listens: 0};
     let finishedSongs = [];
     let finishedSongsText = localStorage.getItem('finishedSongs');
     if (finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
