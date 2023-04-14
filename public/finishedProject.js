@@ -85,6 +85,7 @@ class MusicNotes {
     }
 }
 
+var mySong;
 let instruments = [];
 var bpm;
 var listens;
@@ -106,7 +107,7 @@ async function playInstrument(instrument, beatsToTime) {
     }
 }
 
-function play() {
+async function play() {
     const beatsToTime = (60000 / bpm);
     const playPromises = new Array();
     for (let i = 0; i < instruments.length; ++i) {
@@ -116,8 +117,12 @@ function play() {
         }))
     }
     Promise.all(playPromises);
-    addListen //FIXME figure out how to enumerate
-    listens += 1;
+    mySong.listens += 1;
+    await fetch('/api/listens', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(mySong)
+    });
 }
 
 function delay(time) {
@@ -131,7 +136,7 @@ function delay(time) {
 function load() {
     mySongText = localStorage.getItem('selectedSong');
     if (mySongText !== "undefined") {
-        const mySong = JSON.parse(mySongText);
+        mySong = JSON.parse(mySongText);
         for (let i = 0; i < mySong.music.length; ++i) {
             const music = JSON.parse(mySong.music[i]);
             const newNotes = [];

@@ -17,7 +17,7 @@ async function upload() {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(newSong)
-    }); //FIXME validate this could be very wrong
+    }); 
     window.location.href = "myProjects.html";
 }
 

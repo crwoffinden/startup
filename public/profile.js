@@ -4,10 +4,26 @@ function toHome() {
     window.location.href = "menu.html";
 }
 
-function fill() {
+async function fill() {
     const favorite = document.getElementById("favorite");
-    if (favorite.className === "bi bi-heart") favorite.className = "bi bi-heart-fill";
-    else if (favorite.className === "bi bi-heart-fill") favorite.className = "bi bi-heart";
+    if (favorite.className === "bi bi-heart") {
+        favorite.className = "bi bi-heart-fill";
+        const newFavorite = {user: localStorage.getItem('userName'), favorite: user};
+        await fetch('/api/addFavorite', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(newFavorite)
+        });
+    }
+    else if (favorite.className === "bi bi-heart-fill") {
+        favorite.className = "bi bi-heart";
+        const newUnfavorite = {user: localStorage.getItem('userName'), unfavorite: user};
+        await fetch('/api/removeFavorite', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(newUnfavorite)
+        });
+    }
 }
 
 //FIXME these two functions need to be adjusted based on Database possibilities
@@ -38,11 +54,24 @@ function postMessage() {
     window.location.href = "message.html";
 }
 
-function loadSongs() {
+async function loadSongs() {
     let songs = [];
-    //songs = getSongsByUser//FIXME figure out how to format
-    const songsText = localStorage.getItem('finishedSongs');
-    if (songsText) songs = JSON.parse(songsText);
+    const myUser = {user: user};
+    const options = {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(myUser)
+    };
+    try {
+        const response = await fetch('/api/userSongs', options );
+        songs = await response.json();
+    } catch{
+        if (user === localStorage.getItem('userName')) {
+            const songsText = localStorage.getItem('finishedSongs');
+            if (songsText) songs = JSON.parse(songsText);
+        }
+    }
+    
     let text = document.getElementById('songs');
     if (songs.length > 0) {
         for (let i = 0; (i < songs.length) && (i < 5); ++i) {
@@ -75,11 +104,24 @@ function loadSongs() {
     }
 }
 
-function loadAllSongs() {
+async function loadAllSongs() {
     let songs = [];
-    songs = getSongsByUser//FIXME figure out how to format
-    const songsText = localStorage.getItem('finishedSongs');
-    if (songsText) songs = JSON.parse(songsText);
+    const myUser = {user: user};
+    const options = {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(myUser)
+    };
+    try {
+        const response = await fetch('/api/userSongs', options );
+        songs = await response.json();
+    } catch{
+        if (user === localStorage.getItem('userName')) {
+            const songsText = localStorage.getItem('finishedSongs');
+            if (songsText) songs = JSON.parse(songsText);
+        }
+    }
+
     let text = document.getElementById('songs');
     text.innerHTML = "Songs";
     if (songs.length > 0) {
@@ -153,13 +195,13 @@ function loadAllFollowing() {
 async function loadMessages() {
     let messages = [];
     try {
-        console.log("trying");
         const myUser = {user: user};
-        const response = await fetch('/api/getMessages', {
+        const options = {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(myUser)
-        });
+        }
+        const response = await fetch('/api/getMessages', options);
         messages = await response.json();
     } catch {
         if (user === localStorage.getItem("userName")) {
@@ -235,13 +277,21 @@ async function loadAllMessages() {
     text.appendChild(post);
 }
 
-function load() {
+async function load() {
     const differentUser = localStorage.getItem('differentUser')
     if (differentUser) {
         user = localStorage.getItem('chosenUser');
         
     }
     else user = localStorage.getItem('userName');
+    const favorite = document.getElementById("favorite");
+    const myUserName = {user: localStorage.getItem('userName')};
+    const favoritesList = await fetch('/api/getFavorites', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(myUserName)
+    });
+    if (favoritesList.includes(user)) favorite.className = "bi bi-heart-fill"; //FIXME check this
     loadSongs();
     loadFollowing();
     loadMessages();

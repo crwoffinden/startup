@@ -105,19 +105,40 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-//Upload New Song FIXME validate this you could be way off
+//Upload New Song
 secureApiRouter.post('/songs', async (req, res) => {
-    await DB.addSong(req.body);
-    const songs = await DB.getNewSongs();
-    res.send(songs);
+  await DB.addSong(req.body);
+  const songs = await DB.getNewSongs();
+  res.send(songs);
+});
+
+//Add Listen
+secureApiRouter.post('/listens', async (req, res) => {
+  	await DB.addListen(req.body);
+  	const songs = await DB.getNewSongs();
+  	res.send(songs);
 });
 
 //Post Message
 secureApiRouter.post('/message', async(req, res) => {
-    await DB.addMessage(req.body);
+  	await DB.addMessage(req.body);
     const userMessages = await DB.getUserMessages(req.body.user);
     res.send(userMessages);
 });
+
+//Add Favorite
+secureApiRouter.post('/addFavorite', async(req, res) => {
+	await DB.addFavorite(req.body.user, req.body.favorite);
+	const favorites = await DB.getFavoritedPeople(req.body.user);
+	res.send(favorites);
+});
+
+//Remove Favorite
+secureApiRouter.post('/removeFavorite', async(req, res) => {
+	await DB.removeFavorite(req.body.user, req.body.unfavorite);
+	const favorites = await DB.getFavoritedPeople(req.body.user);
+	res.send(favorites);
+})
 
 //Get New Songs
 secureApiRouter.get('/newSongs', async (_req, res) => {
@@ -129,25 +150,35 @@ secureApiRouter.get('/newSongs', async (_req, res) => {
 
 //Get Popular Songs
 secureApiRouter.get('/popularSongs', async (_req, res) => {
-    const popularSongs = await DB.getPopularSongs();
-    popularSongs = findPopularSongs(popularSongs);
+    const songList = await DB.getPopularSongs();
+    const popularSongs = findPopularSongs(songList);
     res.send(popularSongs);
 });
 
+//Get Songs by User
+secureApiRouter.post('/userSongs', async (req, res) => {
+  	const songs = await DB.getSongsByUser(req.body.user);
+  	res.send(songs);
+});
+
+//Get Favorited People
+secureApiRouter.post('/getFavorites', async (req, res) => {
+	const favorites = await DB.getFavoritedPeople(req.body.user);
+	res.send(favorites);
+})
+
 //Get a User's Messages
 secureApiRouter.post('/getMessages', async (req, res) => {
-    console.log("sent");
     const messages = await DB.getUserMessages(req.body.user);
-    console.log("received");
     res.send(messages);
-})
+});
 
 function findPopularSongs(songs) {
     const popularSongs = [];
     const popularity = [];
     const date = new Date();
     for (let i = 0; i < songs.length; ++i) {
-        pop = songs[i].listens / ((date - songs[i].date) / 86400000); //FIXME validate
+        pop = songs[i].listens / ((date - songs[i].date) / 86400000); //FIXME validate for some reason it's not working
         for (let j = 0; j < popularity.length; ++j) {
             if (pop > popularity[j]) {
                 popularity.splice(j, 0, pop);
@@ -159,6 +190,8 @@ function findPopularSongs(songs) {
         popularSongs.push(songs[i]);
     }
     if (popularSongs.length > 100) popularSongs.length = 100;
+    console.log(popularSongs);
+    console.log(popularity);
     return popularSongs;
 }
 
