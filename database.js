@@ -15,6 +15,7 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 const client = new MongoClient(url);
 
 const userCollection = client.db('startup').collection('user');
+const personCollection = client.db('startup').collection('person');
 const songCollection = client.db('startup').collection('song');
 const messageCollection = client.db('startup').collection('message');
 const favoritesCollection = client.db('startup').collection('favorites');
@@ -37,8 +38,19 @@ async function createUser(email, password) {
     token: uuid.v4(),
   };
   await userCollection.insertOne(user);
+  await personCollection.insertOne({user: email, name: "Firstname Lastname", bio: "This is where you tell us about yourself."});
+  await favoritesCollection.insertOne({user: email, favorites: []});
 
   return user;
+}
+
+async function getProfile(user) {
+	var person;
+	const cursor = personCollection.find({user: user});
+	for await (const doc of cursor) {
+		person = doc;
+	}
+	return person;
 }
 
 function addSong(song) {
@@ -55,25 +67,30 @@ function addMessage(message) {
   messageCollection.insertOne(message);
 }
 
-function addFavorite(user, likedPerson) {
-  const favoritesList = favoritesCollection.find({user: user}).favorites;
-  favoritesList.append(likedPerson);
-  favoritesCollection.updateOne({user: user}, {$set:{favorites: favoritesList}});
+async function addFavorite(user, likedPerson) {
+	const query = {user: user};
+	const cursor = favoritesCollection.find(query);
+	var favoritesList;
+	for await (const doc of cursor) {
+		favoritesList = doc.favorites;
+	}
+	await favoritesList.push(likedPerson);
+	await favoritesCollection.updateOne({user: user}, {$set:{favorites: favoritesList}});
 }
 
 function removeFavorite(user, unlikedPerson) {
-  const favoritesList = favoritesCollection.find({user: user}).favorites;
+  const favoritesList = favoritesCollection.find({user: user}, {favorites: 1});
   const newFavorites = favoritesList.filter(favoritesList => favoritesList != unlikedPerson);
   favoritesCollection.updateOne({user: user}, {$set:{favorites: newFavorites}});
 }
 
-function getNewSongs() {
+async function getNewSongs() {
   const query = {};
   const options = {
-    sort: {date: 1},
+    sort: {date: -1},
     limit: 100
   };
-  const cursor = songCollection.find();
+  const cursor = songCollection.find(query, options);
   return cursor.toArray();
 }
 
@@ -82,20 +99,35 @@ function getPopularSongs() { //TODO validate
   return cursor.toArray();
 }
 
-function getSongsByUser(user) {
-  	const query = {user: user};
-  	const options = {sort: {date: 1}};
+async function getSongsByUser(user) {
+  	const query = {creator: user};
+  	const options = {sort: {date: -1}};
   	const cursor = songCollection.find(query, options);
-  	return cursor.toArray();
+	const songs = await cursor.toArray();
+  	return songs;
 }
 
-function getFavoritedPeople(user) {
-	const favorites = favoritesCollection.find({user: user}).favorites;
+async function getFavoritedPeople(user) {
+	let favorites = [];
+	const  cursor = favoritesCollection.find({user: user});
+	for await (const doc of cursor) {
+		favorites = doc.favorites;
+	}
 	return favorites;
 }
 
-function getSongsByFavoritedUsers() {
-
+async function getSongsByFavoritedUsers(user) {
+	let favorites = [];
+	const cursor = favoritesCollection.find({user: user});
+	for await (const doc of cursor) {
+		favorites = doc.favorites;
+	}
+	const options = {
+		sort: {date: -1},
+		limit: 100
+	};
+	const songsByFavorites = await songCollection.find({creator: {$in: favorites}}, options);
+	return await songsByFavorites.toArray();
 }
 
 function getUserMessages(user) {
@@ -106,15 +138,16 @@ function getUserMessages(user) {
 }
 
 function updateProfile(user) {
-  /*const filter = {email: user.email};
-  const update = {$set{name: user.name, bio: user.bio}};
-  userCollection.updateOne(filter, update);*/
+  const filter = {user: user.user};
+  const update = {$set: {"name": user.name, "bio": user.bio}};
+  personCollection.updateOne(filter, update);
 }
 
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
+  getProfile,
   addSong,
   addListen,
   addMessage,

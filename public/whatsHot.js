@@ -67,7 +67,12 @@ async function display() {
 
     let songsByLikedPeople = [];
     try {
-        const response = await fetch('/api/'/*FIXME get name*/);
+        const user = {user: localStorage.getItem('userName')};
+        const response = await fetch('/api/songsByFavorites', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(user)
+        });
         songsByLikedPeople = await response.json();
         localStorage.setItem("songsByLikedPeople", JSON.stringify(songsByLikedPeople));
     } catch {
@@ -132,7 +137,7 @@ async function loadPopularSongs() {
 
     let popularSongList = document.getElementById('popularSongs');
     popularSongList.innerHTML = "Popular Songs"
-    for (let i = 0; (i < popularSongs.length) && (i < 5); ++i) {
+    for (let i = 0; i < popularSongs.length; ++i) {
         const currSong = document.createElement('li');
         currSong.className = "list-item";
         currSong.onclick = function goToSong() {
@@ -147,7 +152,12 @@ async function loadPopularSongs() {
 async function loadLikedPeople() {
     let songsByLikedPeople = [];
     try {
-        const response = await fetch('/api/'/*FIXME get name*/);
+        const user = {user: localStorage.getItem('userName')};
+        const response = await fetch('/api/songsByFavorites', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(user)
+        });
         songsByLikedPeople = await response.json();
         localStorage.setItem("songsByLikedPeople", JSON.stringify(songsByLikedPeople));
     } catch {

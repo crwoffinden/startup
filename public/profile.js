@@ -27,7 +27,8 @@ async function fill() {
 }
 
 //FIXME these two functions need to be adjusted based on Database possibilities
-function edit(icon) {
+function edit() {
+    let icon = document.getElementById('edit');
     let name = document.getElementById('name');
     let bio = document.getElementById('bio');
     let nameTxt = localStorage.getItem('name');
@@ -37,17 +38,24 @@ function edit(icon) {
     icon.outerHTML = "<i class=\"bi bi-save\" onclick=\"save(this)\"></i>";
 }
 
-function save(icon) {
+async function save(icon) {
     let name = document.getElementById('name');
     let bio = document.getElementById('bio');
-    let nameTxt = document.getElementById('nameInput').value;
-    let bioTxt = document.getElementById('bioInput').value;
+    let nameInput = document.getElementById('nameInput');
+    let bioInput = document.getElementById('bioInput');
+    let nameTxt = nameInput.value;
+    let bioTxt = bioInput.value;
+    const myUser = {user: user, name: nameTxt, bio: bioTxt};
     localStorage.setItem('name', nameTxt);
     localStorage.setItem('bio', bioTxt);
     name.innerHTML = `${nameTxt}`;
     bio.innerHTML = `${bioTxt}`;
-    icon.outerHTML = "<i class=\"bi bi-pencil\" onclick=\"edit(this)\"></i>";
-    //updateProfile
+    icon.outerHTML = "<i class=\"bi bi-pencil\" id=\"edit\" onclick=\"edit()\"></i>";
+    await fetch('/api/updateProfile', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(myUser)
+    });
 }
 
 function postMessage() {
@@ -145,20 +153,34 @@ async function loadAllSongs() {
     }
 }
 
-function loadFollowing() {
-    const following = [];
-    //getFavorites FIXME figure this out
+async function loadFollowing() {
+    let following = [];
+    const currUser = {user: user}
     let text = document.getElementById('following');
     text.innerHTML = "Following";
+    try {
+        const response = await fetch('/api/getFavorites', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(currUser)
+        });
+        following = await response.json();
+        localStorage.setItem('favoritesList', JSON.stringify(following));
+    } catch {
+        const followingText = localStorage.getItem('favoritesList');
+        following = JSON.parse(followingText);
+    }
     if (following.length > 0) {
         for (let i = 0; (i < following.length) && (i < 5); ++i) {
             const newPerson = document.createElement('li');
             newPerson.onclick = function goToProfile() {
-                localStorage.setItem('chosenUser', following[i].user);
+                if(!JSON.parse(localStorage.getItem('differentUser'))) localStorage.setItem('newUser', true);
+                else localStorage.setItem('newUser', false);
+                localStorage.setItem('chosenUser', following[i]);
                 localStorage.setItem('differentUser', true);
                 load();
             };
-            newPerson.innerText = following[i].name;
+            newPerson.innerText = following[i];
             text.appendChild(newPerson);
         } if (following.length > 5) {
             let seeAll = document.createElement("span");
@@ -173,20 +195,34 @@ function loadFollowing() {
     }
 }
 
-function loadAllFollowing() {
-    const following = [];
-    //getFavorites FIXME figure this out
+async function loadAllFollowing() {
+    let following = [];
+    const currUser = {user: user}
     let text = document.getElementById('following');
     text.innerHTML = "Following";
+    try {
+        const response = await fetch('/api/getFavorites', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(currUser)
+        });
+        following = await response.json();
+        localStorage.setItem('favoritesList', JSON.stringify(following));
+    } catch {
+        const followingText = localStorage.getItem('favoritesList');
+        following = JSON.parse(followingText);
+    }
     if (following.length > 0) {
         for (let i = 0; (i < following.length) && (i < 5); ++i) {
             const newPerson = document.createElement('li');
             newPerson.onclick = function goToProfile() {
-                localStorage.setItem('chosenUser', following[i].user);
+                if(!JSON.parse(localStorage.getItem('differentUser'))) localStorage.setItem('newUser', true);
+                else localStorage.setItem('newUser', false);
+                localStorage.setItem('chosenUser', following[i]);
                 localStorage.setItem('differentUser', true);
                 load();
             };
-            newPerson.innerText = following[i].name;
+            newPerson.innerText = following[i];
             text.appendChild(newPerson);
         }
     }
@@ -278,25 +314,50 @@ async function loadAllMessages() {
 }
 
 async function load() {
-    const differentUser = localStorage.getItem('differentUser')
+    const differentUserString = localStorage.getItem('differentUser');
+    const differentUser = JSON.parse(differentUserString);
+    const newUser = JSON.parse(localStorage.getItem('newUser'));
     if (differentUser) {
         user = localStorage.getItem('chosenUser');
-        
+        if (newUser) {
+            const editIcon = document.getElementById('edit');
+            editIcon.remove();
+        }
     }
-    else user = localStorage.getItem('userName');
+    else {
+        user = localStorage.getItem('userName');
+        const mainBar = document.getElementById('options');
+        const editIcon = document.createElement('i');
+        editIcon.className = "bi bi-pencil";
+        editIcon.id = "edit"
+        editIcon.onclick = edit;
+        mainBar.appendChild(editIcon);  
+    } 
+    const currUser = {user: user};
+    const response = await fetch('/api/profile', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(currUser)
+    });
+    userProfile = await response.json();
+    document.getElementById('name').innerText = userProfile.name;
+    document.getElementById('bio').innerText = userProfile.bio;
     const favorite = document.getElementById("favorite");
     const myUserName = {user: localStorage.getItem('userName')};
-    const favoritesList = await fetch('/api/getFavorites', {
+    const favoritesResponse = await fetch('/api/getFavorites', {
         method: 'POST',
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(myUserName)
     });
-    if (favoritesList.includes(user)) favorite.className = "bi bi-heart-fill"; //FIXME check this
+    const favoritesList = await favoritesResponse.json();
+    if (favoritesList.includes(user)) favorite.className = "bi bi-heart-fill"; 
     loadSongs();
     loadFollowing();
     loadMessages();
 }
 
 var user;
+
+var userProfile;
 
 load();

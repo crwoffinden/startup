@@ -18,6 +18,15 @@ async function upload() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(newSong)
     }); 
+    const editingSongText = localStorage.getItem('editingSong');
+    const editingSong = JSON.parse(editingSongText);
+    let unfinishedSongs = [];
+    if (editingSong) {
+        const unfinishedSongsText = localStorage.getItem('unfinishedSongs');
+        if (unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
+        unfinishedSongs.shift();
+    }
+    localStorage.setItem('unfinishedSongs', JSON.stringify(unfinishedSongs));
     window.location.href = "myProjects.html";
 }
 

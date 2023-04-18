@@ -155,8 +155,6 @@ function load() {
         listens = mySong.plays;
         user = creator;
     }
-    else instruments = [new MusicNotes('Piano')];
-    user = localStorage.getItem('userName');
     display();
 }
 

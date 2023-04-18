@@ -105,6 +105,12 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+//Get Profile
+secureApiRouter.post('/profile', async (req, res) => {
+	const profile = await DB.getProfile(req.body.user);
+	res.send(profile);
+});
+
 //Upload New Song
 secureApiRouter.post('/songs', async (req, res) => {
   await DB.addSong(req.body);
@@ -167,10 +173,23 @@ secureApiRouter.post('/getFavorites', async (req, res) => {
 	res.send(favorites);
 })
 
+//Get Songs by Favorited People
+secureApiRouter.post('/songsByFavorites', async (req, res) => {
+	const songsByFavorites = await DB.getSongsByFavoritedUsers(req.body.user);
+	res.send(songsByFavorites);
+});
+
 //Get a User's Messages
 secureApiRouter.post('/getMessages', async (req, res) => {
     const messages = await DB.getUserMessages(req.body.user);
     res.send(messages);
+});
+
+//Update Profile
+secureApiRouter.post('/updateProfile', async (req, res) => {
+	await DB.updateProfile(req.body);
+	const profile = await DB.getProfile(req.body.user);
+	res.send(profile);
 });
 
 function findPopularSongs(songs) {
@@ -178,16 +197,20 @@ function findPopularSongs(songs) {
     const popularity = [];
     const date = new Date();
     for (let i = 0; i < songs.length; ++i) {
-        pop = songs[i].listens / ((date - songs[i].date) / 86400000); //FIXME validate for some reason it's not working
-        for (let j = 0; j < popularity.length; ++j) {
+		const releaseDate = new Date(songs[i].date);
+        const pop = songs[i].listens / ((date - releaseDate) / 86400000);
+        var j;
+		for (j = 0; j < popularity.length; ++j) {
             if (pop > popularity[j]) {
                 popularity.splice(j, 0, pop);
                 popularSongs.splice(j, 0, songs[i]);
                 break;
             }
         }
-        popularity.push(pop);
-        popularSongs.push(songs[i]);
+		if (j === popularity.length) {
+			popularity.push(pop);
+        	popularSongs.push(songs[i]);
+		}   
     }
     if (popularSongs.length > 100) popularSongs.length = 100;
     console.log(popularSongs);

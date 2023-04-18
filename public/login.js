@@ -2,7 +2,7 @@
   let authenticated = false;
   const userName = localStorage.getItem('userName');
   if (userName) {
-    const nameEl = document.querySelector('#userName');
+    const nameEl = document.querySelector('#username');
     nameEl.value = userName;
     const user = await getUser(nameEl.value);
     authenticated = user?.authenticated;
@@ -31,6 +31,7 @@ async function loginOrCreate(endpoint) {
 
   if (response?.status === 200) {
     localStorage.setItem('userName', userName);
+    localStorage.setItem('differentUser', false);
     window.location.href = 'menu.html';
   } else {
     const modalEl = document.querySelector('#msgModal');

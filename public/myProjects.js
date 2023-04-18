@@ -6,11 +6,21 @@ function toHome() {
     window.location.href = "menu.html";
 }
 
-function loadSongs() {
+async function loadSongs() {
     const finishedFolder = document.getElementById("finished");
     let finishedSongs = [];
-    const finishedSongsText = localStorage.getItem('finishedSongs');
-    if(finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
+    try {
+        const user = {user: localStorage.getItem('userName')};
+        const response = await fetch('/api/userSongs', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(user)
+        });
+        finishedSongs = await response.json();
+    } catch {
+        const finishedSongsText = localStorage.getItem('finishedSongs');
+        if(finishedSongsText) finishedSongs = JSON.parse(finishedSongsText);
+    }
     for (let i = 0; i < finishedSongs.length; ++i) {
         const song = document.createElement('li');
         song.onclick = function goToSong() {
@@ -37,7 +47,10 @@ function loadSongs() {
         const song = document.createElement('li');
         song.onclick = function goToSong() {
             localStorage.setItem('selectedSong', JSON.stringify(unfinishedSongs[i]));
-            unfinishedSongs.unshift(unfinishedSongs[i]);
+            const selectedSong = unfinishedSongs[i];
+            unfinishedSongs.unshift(selectedSong);
+            unfinishedSongs.splice((i + 1), 1);
+            localStorage.setItem('unfinishedSongs', JSON.stringify(unfinishedSongs));
             window.location.href = "newProject.html";
         };
         song.innerText = unfinishedSongs[i].title;

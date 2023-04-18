@@ -29,15 +29,18 @@ function save() {
     const music = [];
     for (let i = 0; i < instruments.length; ++i) {
         music.push(instruments[i]);
-        music[i] = (JSON.stringify(music[i]));
     }
     const date = new Date();
     const newSong = {title: document.getElementById('songTitle').value, date: date, bpm: document.getElementById('bpm').value, music: music};
     let unfinishedSongs = [];
     unfinishedSongsText = localStorage.getItem('unfinishedSongs');
     if (unfinishedSongsText) unfinishedSongs = JSON.parse(unfinishedSongsText);
-    unfinishedSongs[0] = newSong;
+    const editingSongText = localStorage.getItem('editingSong');
+    const editingSong = JSON.parse(editingSongText);
+    if (editingSong) unfinishedSongs[0] = newSong;
+    else unfinishedSongs.unshift(newSong);
     localStorage.setItem('unfinishedSongs', JSON.stringify(unfinishedSongs));
+    localStorage.setItem('editingSong', true);
 }
 
 function addInstrument() {
@@ -249,18 +252,22 @@ function load() {
     if (mySongText !== "undefined") {
         const mySong = JSON.parse(mySongText);
         for (let i = 0; i < mySong.music.length; ++i) {
-            const music = JSON.parse(mySong.music[i]);
-            const newNotes = [];
-            for (let j = 0; j < music.notes.length; ++j) {
-                newNotes.push(new Note(music.notes[j].pitch, Number(music.notes[j].length)))
+            const newInstrument = new MusicNotes(mySong.music[i].instrument);
+            let position = 0;
+            for (let j = 0; j < mySong.music[i].notes.length; ++j) {
+                newInstrument.addNote(position, new Note(mySong.music[i].notes[j].pitch, Number(mySong.music[i].notes[j].length)));
+                position += Number(mySong.music[i].notes[j].length);
             }
-            const currInstrument = new MusicNotes(music.instrument, newNotes);
-            instruments.push(currInstrument);
+            instruments.push(newInstrument);
         }
         document.getElementById('songTitle').value = mySong.title;
         document.getElementById('bpm').value = mySong.bpm;
+        localStorage.setItem('editingSong', true);
     }
-    else instruments = [new MusicNotes('Piano')];
+    else {
+        instruments = [new MusicNotes('Piano')];
+        localStorage.setItem('editingSong', false);
+    }
     display();
 }
 
