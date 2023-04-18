@@ -166,7 +166,7 @@ async function loadLikedPeople() {
     }
 
     let songsByLikedPeopleList = document.getElementById('likedPeopleSongs');
-    songsByLikedPeopleList.innerHTML = "People You Like"
+    songsByLikedPeopleList.innerHTML = "People You Like";
     for (let i = 0; (i < songsByLikedPeople.length) && (i < 5); ++i) {
         const currSong = document.createElement('li');
         currSong.className = "list-item";
