@@ -69,7 +69,7 @@ function broadcastEvent(from, type, value) {
 function startScreen() {
     let title = localStorage.getItem('title');
     document.getElementById('song-title').value = title;
-    configureWebSocket
+    configureWebSocket();
 }
  
 var socket;
