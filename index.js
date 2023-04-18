@@ -213,8 +213,6 @@ function findPopularSongs(songs) {
 		}   
     }
     if (popularSongs.length > 100) popularSongs.length = 100;
-    console.log(popularSongs);
-    console.log(popularity);
     return popularSongs;
 }
 
