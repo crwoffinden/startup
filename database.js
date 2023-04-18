@@ -78,10 +78,14 @@ async function addFavorite(user, likedPerson) {
 	await favoritesCollection.updateOne({user: user}, {$set:{favorites: favoritesList}});
 }
 
-function removeFavorite(user, unlikedPerson) {
-  const favoritesList = favoritesCollection.find({user: user}, {favorites: 1});
-  const newFavorites = favoritesList.filter(favoritesList => favoritesList != unlikedPerson);
-  favoritesCollection.updateOne({user: user}, {$set:{favorites: newFavorites}});
+async function removeFavorite(user, unlikedPerson) {
+	var favoritesList = [];
+  	const cursor = favoritesCollection.find({user: user}, {favorites: 1});
+	  for await (const doc of cursor) {
+		favoritesList = doc.favorites;
+	}
+  	const newFavorites = favoritesList.filter(favoritesList => favoritesList != unlikedPerson);
+  	favoritesCollection.updateOne({user: user}, {$set:{favorites: newFavorites}});
 }
 
 async function getNewSongs() {
