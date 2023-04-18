@@ -136,7 +136,7 @@ async function getSongsByFavoritedUsers(user) {
 
 function getUserMessages(user) {
   const query = {user: user};
-  const options = {sort: {date: 1}};
+  const options = {sort: {date: -1}};
   const cursor = messageCollection.find(query, options);
   return cursor.toArray();
 }

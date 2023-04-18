@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
 
@@ -101,10 +102,6 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
-
 //Get Profile
 secureApiRouter.post('/profile', async (req, res) => {
 	const profile = await DB.getProfile(req.body.user);
@@ -192,6 +189,10 @@ secureApiRouter.post('/updateProfile', async (req, res) => {
 	res.send(profile);
 });
 
+const httpService = app.listen(port, () => {
+	console.log(`Listening on port ${port}`);
+  });
+
 function findPopularSongs(songs) {
     const popularSongs = [];
     const popularity = [];
@@ -215,4 +216,6 @@ function findPopularSongs(songs) {
     if (popularSongs.length > 100) popularSongs.length = 100;
     return popularSongs;
 }
+
+peerProxy(httpService);
 

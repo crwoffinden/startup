@@ -1,3 +1,5 @@
+const uploadEvent = 'upload';
+
 async function upload() {
     const creator = localStorage.getItem('userName');
     const title = document.getElementById("song-title").value;
@@ -17,7 +19,8 @@ async function upload() {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(newSong)
-    }); 
+    });
+    broadcastEvent(creator, uploadEvent);
     const editingSongText = localStorage.getItem('editingSong');
     const editingSong = JSON.parse(editingSongText);
     let unfinishedSongs = [];
@@ -30,9 +33,45 @@ async function upload() {
     window.location.href = "myProjects.html";
 }
 
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    //TODO is this necessary?
+    socket.onopen = (event) => {
+        displayMsg('system', 'game', 'connected');
+    };
+    socket.onclose = (event) => {
+        displayMsg('system', 'game', 'disconnected');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === uploadEvent) {
+            displayMsg('user', msg.from, `uploaded a new song`);
+        } 
+    };
+}
+
+function displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+}
+
+function broadcastEvent(from, type, value) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+    };
+    socket.send(JSON.stringify(event));
+}
+
 function startScreen() {
     let title = localStorage.getItem('title');
     document.getElementById('song-title').value = title;
+    configureWebSocket
 }
  
+var socket;
+
 startScreen();
