@@ -302,5 +302,8 @@
     padding-top: 0.25em;
     opacity: 0.7;
     color: aquamarine;
-    font-size: 10px;
+    font-size: 15px;
+    align-items: right;
+    position: absolute;
+    top: 6vw;
 }

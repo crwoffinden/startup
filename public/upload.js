@@ -36,13 +36,6 @@ async function upload() {
 function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    //TODO is this necessary?
-    socket.onopen = (event) => {
-        displayMsg('system', 'game', 'connected');
-    };
-    socket.onclose = (event) => {
-        displayMsg('system', 'game', 'disconnected');
-    };
     socket.onmessage = async (event) => {
         const msg = JSON.parse(await event.data.text());
         if (msg.type === uploadEvent) {
