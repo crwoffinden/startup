@@ -305,7 +305,8 @@
     opacity: 0.7;
     color: aquamarine;
     font-size: 15px;
-    align-items: right;
+    align-content: right;
     position: absolute;
     top: 6vw;
+    right: 20vw;
 }

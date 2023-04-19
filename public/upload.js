@@ -45,12 +45,13 @@ function configureWebSocket() {
 }
 
 function displayMsg(cls, from, msg) {
-    const chatText = document.getElementsByClassName('chatMessages');
+    const chatText = document.getElementById('chatMessages');
     for (const chat of chatText) {
         const chatTextMessage = chat.innerHTML;
         chat.innerHTML =
       `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatTextMessage;
     }
+    localStorage.setItem('chatText', )
 }
 
 function broadcastEvent(from, type, value) {
