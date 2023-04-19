@@ -297,3 +297,10 @@
     text-align: right;
     font-size: 15px;
 }
+
+#chatMessages {
+    padding-top: 0.25em;
+    opacity: 0.7;
+    color: aquamarine;
+    font-size: 10px;
+}

@@ -52,7 +52,7 @@ function configureWebSocket() {
 }
 
 function displayMsg(cls, from, msg) {
-    const chatText = document.querySelector('#player-messages');
+    const chatText = document.querySelector('#chatMessages');
     const chatTextMessage = chatText.innerHTML;
     chatText.innerHTML =
       `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatTextMessage;
