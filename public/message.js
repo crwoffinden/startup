@@ -32,7 +32,7 @@ function configureWebSocket() {
 }
 
 function displayMsg(cls, from, msg) {
-    const chatText = Array.from(document.getElementsByClassName('chatMessages'));
+    const chatText = document.getElementsByClassName('chatMessages');
     for (const chat of chatText) {
         const chatTextMessage = chat.innerHTML;
         chat.innerHTML =
