@@ -1,4 +1,5 @@
 const uploadEvent = 'upload';
+const messageEvent = 'message';
 
 async function upload() {
     const creator = localStorage.getItem('userName');
@@ -41,6 +42,9 @@ function configureWebSocket() {
         if (msg.type === uploadEvent) {
             displayMsg('user', msg.from, `uploaded a new song`);
         } 
+        else if (msg.type === messageEvent) {
+            displayMsg('user', msg.from, `posted a new message`);
+        }
     };
 }
 

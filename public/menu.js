@@ -1,3 +1,6 @@
+const uploadEvent = 'upload';
+const messageEvent = 'message';
+
 function toProfile() {
     localStorage.setItem('differentUser', false);
     window.location.href = "profile.html";
@@ -21,7 +24,10 @@ function configureWebSocket() {
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     socket.onmessage = async (event) => {
         const msg = JSON.parse(await event.data.text());
-        if (msg.type === messageEvent) {
+        if (msg.type === uploadEvent) {
+            displayMsg('user', msg.from, `uploaded a new song`);
+        } 
+        else if (msg.type === messageEvent) {
             displayMsg('user', msg.from, `posted a new message`);
         } 
     };
