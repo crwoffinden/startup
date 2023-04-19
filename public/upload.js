@@ -52,10 +52,12 @@ function configureWebSocket() {
 }
 
 function displayMsg(cls, from, msg) {
-    const chatText = document.querySelector('#chatMessages');
-    const chatTextMessage = chatText.innerHTML;
-    chatText.innerHTML =
+    const chatText = Array.from(document.getElementsByClassName('chatMessages'));
+    for (const chat of chatText) {
+        const chatTextMessage = chat.innerHTML;
+        chat.innerHTML =
       `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatTextMessage;
+    }
 }
 
 function broadcastEvent(from, type, value) {
